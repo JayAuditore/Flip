@@ -17,7 +17,17 @@ public class Interactingwithobjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        raycasthit();
+        Interact.Interacting(this.gameObject, 2, "Square",textsettrue,textsetfalse);
+        //raycasthit();
+    }
+    public void textsettrue()
+    {
+        text.gameObject.SetActive(true);
+        text.rectTransform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 1.5f, 0));
+    }
+    public void textsetfalse()
+    {
+        text.gameObject.SetActive(false);
     }
     public void raycasthit()
     {
