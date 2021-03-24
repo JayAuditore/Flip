@@ -13,7 +13,7 @@ public class Interact : MonoBehaviour
             Instantiate(instance);
         }
     }
-    public static void Interacting(GameObject target,float rads,string collidermask)
+    public static void Interacting(GameObject target, float rads, string collidermask)
     {
         Collider2D[] cols = Physics2D.OverlapCircleAll(target.transform.position, rads, LayerMask.GetMask(collidermask));
         if (cols.Length > 0)
@@ -22,7 +22,18 @@ public class Interact : MonoBehaviour
         }
         else
         {
-
+        }
+    }
+    public static void Interacting(GameObject target, float rads, string collidermask, funtion fun1)
+    {
+        Collider2D[] cols = Physics2D.OverlapCircleAll(target.transform.position, rads, LayerMask.GetMask(collidermask));
+        if (cols.Length > 0)
+        {
+            Debug.Log("已经感应到物体了");
+            fun1();
+        }
+        else
+        {
         }
     }
     public static void Interacting(GameObject target, float rads, string collidermask,funtion fun1,funtion fun2)
@@ -38,5 +49,7 @@ public class Interact : MonoBehaviour
             fun2();
         }
     }
+
+    
 
 }
