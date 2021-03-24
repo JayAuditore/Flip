@@ -8,6 +8,7 @@ public class Interactingwithobjects : MonoBehaviour
 {
     
     public TMP_Text text;
+    Interact interact = new Interact();
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class Interactingwithobjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Interact.Interacting(this.gameObject, 2, "Square",textsettrue,textsetfalse);
+        interact.Interacting(this.gameObject, 2, "Square",textsettrue,textsetfalse);
     }
     public void textsettrue()
     {
