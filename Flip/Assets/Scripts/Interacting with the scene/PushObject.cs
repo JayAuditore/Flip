@@ -17,10 +17,8 @@ public class PushObject : MonoBehaviour
     }
     public void canpush()
     {
-        Debug.Log(raycastHit2D[0].transform.name);
         if (Input.GetKey(KeyCode.F) && ((raycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0))
         {
-            Debug.Log("1");
             raycastHit2D[0].transform.position = raycastHit2D[0].transform.position + new Vector3(Input.GetAxisRaw("Horizontal")*Time.fixedDeltaTime, 0, 0);
         }
         else
