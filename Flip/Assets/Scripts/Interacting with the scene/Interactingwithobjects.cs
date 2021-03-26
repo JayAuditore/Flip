@@ -18,14 +18,14 @@ public class InteractingWithObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        interact.Interacting(this.gameObject, 2, "Square",textsettrue,textsetfalse);
+        interact.Interacting(this.gameObject, 2, "Square", TextSetTrue, TextSetFalse);
     }
-    public void textsettrue()
+    public void TextSetTrue()
     {
         text.gameObject.SetActive(true);
         text.rectTransform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 1.5f, 0));
     }
-    public void textsetfalse()
+    public void TextSetFalse()
     {
         text.gameObject.SetActive(false);
     }

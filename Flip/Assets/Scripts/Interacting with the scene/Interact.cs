@@ -6,38 +6,38 @@ public class Interact : MonoBehaviour
 {
     public delegate void funtion();
 
-    public Collider2D[] cols;
-    public void Interacting(GameObject target, float rads, string collidermask)
+    public Collider2D[] _collider2D;
+    public void Interacting(GameObject target, float radius, string colliderMask)
     {
-        cols = Physics2D.OverlapCircleAll(target.transform.position, rads, LayerMask.GetMask(collidermask));
-        if (cols.Length > 0)
+        _collider2D = Physics2D.OverlapCircleAll(target.transform.position, radius, LayerMask.GetMask(colliderMask));
+        if (_collider2D.Length > 0)
         {
         }
         else
         {
         }
     }
-    public void Interacting(GameObject target, float rads, string collidermask, funtion fun1)
+    public void Interacting(GameObject target, float radius, string colliderMask, funtion funtion1)
     {
-        cols = Physics2D.OverlapCircleAll(target.transform.position, rads, LayerMask.GetMask(collidermask));
-        if (cols.Length > 0)
+        _collider2D = Physics2D.OverlapCircleAll(target.transform.position, radius, LayerMask.GetMask(colliderMask));
+        if (_collider2D.Length > 0)
         {
-            fun1();
+            funtion1();
         }
         else
         {
         }
     }
-    public void Interacting(GameObject target, float rads, string collidermask, funtion fun1, funtion fun2)
+    public void Interacting(GameObject target, float radius, string colliderMask, funtion funtion1, funtion funtion2)
     {
-        cols = Physics2D.OverlapCircleAll(target.transform.position, rads, LayerMask.GetMask(collidermask));
-        if (cols.Length > 0)
+        _collider2D = Physics2D.OverlapCircleAll(target.transform.position, radius, LayerMask.GetMask(colliderMask));
+        if (_collider2D.Length > 0)
         {
-            fun1();
+            funtion1();
         }
         else
         {
-            fun2();
+            funtion2();
         }
     }
 
