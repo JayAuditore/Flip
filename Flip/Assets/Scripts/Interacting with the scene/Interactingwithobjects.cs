@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Interactingwithobjects : MonoBehaviour
+public class InteractingWithObjects : MonoBehaviour
 {
     
     public TMP_Text text;
