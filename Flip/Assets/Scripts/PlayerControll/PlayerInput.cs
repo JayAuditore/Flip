@@ -16,16 +16,10 @@ namespace Flip.PlayerControll
         public bool IsAccelerating;
         public bool IsCrouching;
         public bool CanJump;
-        public PlayerMove PlayerController;
 
         #endregion
 
         #region Unity»Øµ÷
-
-        private void Start()
-        {
-            PlayerController = GetComponent<PlayerMove>();
-        }
         private void Update()
         {
             SwitchMovement();
