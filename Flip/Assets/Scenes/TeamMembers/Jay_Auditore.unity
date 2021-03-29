@@ -497,6 +497,7 @@ GameObject:
   - component: {fileID: 1923721559}
   - component: {fileID: 1923721562}
   - component: {fileID: 1923721558}
+  - component: {fileID: 1923721563}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Player
@@ -542,17 +543,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6f85e8d843a5d449754b8287c4a90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPressed: 0
-  crouchPressed: 0
-  accelerationTime: 0.05
-  jumpForce: 10
-  speed: 5
-  augmentedVelocity: 10
-  IsGrounded: 0
-  IsJumping: 0
-  IsAccelerating: 0
+  AccelerationTime: 0
+  JumpForce: 0
+  Speed: 0
+  CrouchSpeed: 0
+  AugmentedVelocity: 0
   GroundCheck: {fileID: 596158991}
-  CeilingCheck: {fileID: 1244517966}
   Coll: {fileID: 1923721558}
   Ground:
     serializedVersion: 2
@@ -645,3 +641,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1923721563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923721557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817738a56b6c9524688f08d3e4c78c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpPressed: 0
+  crouchPressed: 0
+  jumpCount: 1
+  IsGrounded: 0
+  IsJumping: 0
+  IsAccelerating: 0
