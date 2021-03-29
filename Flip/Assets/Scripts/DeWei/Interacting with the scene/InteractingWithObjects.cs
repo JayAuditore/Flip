@@ -6,9 +6,8 @@ using TMPro;
 
 public class InteractingWithObjects : MonoBehaviour
 {
-    
     public TMP_Text text;
-    Interact interact = new Interact();
+    public Interact interact ;
     // Start is called before the first frame update
     void Start()
     {
