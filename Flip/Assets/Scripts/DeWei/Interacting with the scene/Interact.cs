@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Interacting", menuName = "ScriptableObjects/InteractingScriptableObject")]
-public class Interact :ScriptableObject
+public class Interact :MonoBehaviour
 {
+    private Interact() { }
+    public static class InteractInstance
+    {
+        public static Interact instance = new Interact();
+    }
+    public static Interact GetInstance()
+    {
+        return InteractInstance.instance;
+    }
     
     public delegate void funtion();         //委托的方法
 
-    public Collider2D[] _collider2D;    //检测到的物体
+    public static Collider2D[] _collider2D;    //检测到的物体
     public void Interacting(GameObject target, float radius, string colliderMask)
     {
         _collider2D = Physics2D.OverlapCircleAll(target.transform.position, radius, LayerMask.GetMask(colliderMask));

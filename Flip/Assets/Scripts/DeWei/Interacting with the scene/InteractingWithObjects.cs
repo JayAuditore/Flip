@@ -7,7 +7,6 @@ using TMPro;
 public class InteractingWithObjects : MonoBehaviour
 {
     public TMP_Text text;
-    public Interact interact ;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +16,7 @@ public class InteractingWithObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        interact.Interacting(this.gameObject, 2, "Square", TextSetTrue, TextSetFalse);
+        Interact.InteractInstance.instance.Interacting(this.gameObject, 2, "Square", TextSetTrue, TextSetFalse);
     }
     public void TextSetTrue()
     {
