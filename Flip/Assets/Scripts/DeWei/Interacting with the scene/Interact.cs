@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interact :MonoBehaviour
+public class Interact 
 {
     private Interact() { }
     public static class InteractInstance
