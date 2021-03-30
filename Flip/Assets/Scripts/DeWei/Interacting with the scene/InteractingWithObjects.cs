@@ -16,7 +16,7 @@ public class InteractingWithObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Interact.InteractInstance.instance.Interacting(this.gameObject, 2, "Square", TextSetTrue, TextSetFalse);
+        Interact.GetInstance().Interacting(this.gameObject, 2, "Square", TextSetTrue, TextSetFalse);
     }
     public void TextSetTrue()
     {
