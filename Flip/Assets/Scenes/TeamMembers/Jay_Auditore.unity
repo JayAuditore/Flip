@@ -431,6 +431,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 991970161488313108, guid: 115ae0d6f606b634ea5c349d75560aa0, type: 3}
+      propertyPath: RushJumpForce
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 991970161488313108, guid: 115ae0d6f606b634ea5c349d75560aa0, type: 3}
+      propertyPath: AccelerationTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 991970161488313110, guid: 115ae0d6f606b634ea5c349d75560aa0, type: 3}
       propertyPath: m_Name
       value: Player
