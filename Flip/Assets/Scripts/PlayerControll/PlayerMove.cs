@@ -22,6 +22,7 @@ namespace Flip.PlayerControll
         public float RushJumpForce;
         public float Speed;
         public float CrouchSpeed;
+        public float ClimbSpeed;
         public float AugmentedVelocity;
         [Space]
         [Header("Component")]
@@ -130,7 +131,25 @@ namespace Flip.PlayerControll
             rb.velocity = CalculateVelocity();
         }
 
-        //跳跃
+        //普通跳跃
+        void SetNormalJump()
+        {
+            playerInput.IsJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, JumpForce);
+            playerInput.JumpCount--;
+            playerInput.JumpPressed = false;
+        }
+
+        //跑跳
+        void SetRushJump()
+        {
+            playerInput.IsJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, RushJumpForce);
+            playerInput.JumpCount--;
+            playerInput.JumpPressed = false;
+        }
+
+        //跳跃判断
         void Jump()
         {
             if (playerInput.CanJump)
@@ -145,26 +164,17 @@ namespace Flip.PlayerControll
                 //普通的跳跃
                 if (playerInput.NormalJumping && playerInput.IsGrounded)
                 {
-                    playerInput.IsJumping = true;
-                    rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-                    playerInput.JumpCount--;
-                    playerInput.JumpPressed = false;
+                    SetNormalJump();
                 }
                 //跑跳
                 else if (playerInput.RushJumping && rb.velocity.x != 0 && playerInput.IsGrounded)
                 {
-                    playerInput.IsJumping = true;
-                    rb.velocity = new Vector2(rb.velocity.x, RushJumpForce);
-                    playerInput.JumpCount--;
-                    playerInput.JumpPressed = false;
+                    SetRushJump();
                 }
                 //按住shift原地起跳
                 else if (playerInput.RushJumping && playerInput.IsGrounded)
                 {
-                    playerInput.IsJumping = true;
-                    rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-                    playerInput.JumpCount--;
-                    playerInput.JumpPressed = false;
+                    SetNormalJump();
                 }
             }
         }
@@ -173,14 +183,14 @@ namespace Flip.PlayerControll
         void Crouch()
         {
             //蹲下
-            if (Input.GetKeyDown(KeyCode.S))
+            if (playerInput.CrouchPressed)
             {
                 Coll.size = new Vector2(Coll.size.x, 0.5f);
                 Coll.offset = new Vector2(Coll.offset.x, -0.25f);
                 playerInput.CanJump = false;
             }
             //站立
-            if (Input.GetKeyUp(KeyCode.S))
+            if (!playerInput.CrouchPressed)
             {
                 Coll.size = new Vector2(Coll.size.x, 1f);
                 Coll.offset = new Vector2(Coll.offset.x, 0f);
