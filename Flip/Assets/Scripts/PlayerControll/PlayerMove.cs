@@ -9,8 +9,6 @@ namespace Flip.PlayerControll
     {
         #region 字段
 
-        private float OriginalSize;
-        private float OriginalOffset;
         private Rigidbody2D rb;
         private PlayerInput playerInput;
 
@@ -27,12 +25,6 @@ namespace Flip.PlayerControll
         #endregion
 
         #region Unity回调
-
-        void Awake()
-        {
-            OriginalSize = Coll.size.y;
-            OriginalOffset = Coll.offset.y;
-        }
 
         void Start()
         {
@@ -52,7 +44,7 @@ namespace Flip.PlayerControll
         void FixedUpdate()
         {
             playerInput.IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.1f, Ground);
-            playerInput.IsCrouching = Physics2D.OverlapCircle(CeilingCheck.position, 0.1f, Ground);
+            playerInput.CanJump = Physics2D.OverlapCircle(CeilingCheck.position, 0.1f, Ground);
             Move();
         }
 
@@ -76,7 +68,7 @@ namespace Flip.PlayerControll
                         rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, AugmentedVelocity * horizontalMove, Time.deltaTime * (1 / 0.1f)), rb.velocity.y);
                     }
                     //蹲下
-                    else if (playerInput.IsCrouching)
+                    else if (playerInput.CrouchPressed)
                     {
                         rb.velocity = new Vector2(CrouchSpeed * horizontalMove, rb.velocity.y);
                     }
@@ -94,7 +86,7 @@ namespace Flip.PlayerControll
             }
             else
             {
-                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, Time.deltaTime * (1 / 0.5f)), rb.velocity.y);
+                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, Time.deltaTime * (1 / 0.2f)), rb.velocity.y);
 
             }
         }
@@ -102,41 +94,33 @@ namespace Flip.PlayerControll
         //跳跃
         void Jump()
         {
-            if (playerInput.IsGrounded && !playerInput.IsCrouching)
+            if (!playerInput.CanJump)
             {
-                playerInput.JumpCount = 1;
-                playerInput.IsJumping = false;
-                playerInput.CanJump = true;
-            }
+                if (playerInput.IsGrounded && !playerInput.CrouchPressed)
+                {
+                    playerInput.JumpCount = 1;
+                    playerInput.IsJumping = false;
+                }
 
-            if (playerInput.JumpPressed && playerInput.IsGrounded)
-            {
-                playerInput.IsJumping = true;
-                rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-                playerInput.JumpCount--;
-                playerInput.JumpPressed = false;
+                if (playerInput.JumpPressed && playerInput.IsGrounded)
+                {
+                    playerInput.IsJumping = true;
+                    rb.velocity = new Vector2(rb.velocity.x, JumpForce);
+                    playerInput.JumpCount--;
+                    playerInput.JumpPressed = false;
+                }
             }
         }
 
         //蹲下
         void Crouch()
         {
-            if (playerInput.CrouchPressed && !playerInput.IsJumping)
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 Coll.size = new Vector2(Coll.size.x, Coll.size.y / 2);
                 Coll.offset = new Vector2(Coll.offset.x, Coll.offset.y - (Coll.size.y / 2));
-                playerInput.CrouchPressed = false;
             }
         }
-
-        //void ReSet()
-        //{
-        //    if (!playerInput.crouchPressed)
-        //    {
-        //        Coll.size = new Vector2(Coll.size.x, OriginalSize);
-        //        Coll.offset = new Vector2(Coll.offset.x, OriginalOffset);
-        //    }
-        //}
 
         void Move()
         {

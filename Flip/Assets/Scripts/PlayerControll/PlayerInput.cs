@@ -14,12 +14,12 @@ namespace Flip.PlayerControll
         public bool IsGrounded;
         public bool IsJumping;
         public bool IsAccelerating;
-        public bool IsCrouching;
         public bool CanJump;
 
         #endregion
 
         #region Unity»Øµ÷
+
         private void Update()
         {
             SwitchMovement();
@@ -49,6 +49,7 @@ namespace Flip.PlayerControll
             {
                 CrouchPressed = true;
             }
+
             if (Input.GetKeyUp(KeyCode.S))
             {
                 CrouchPressed = false;
