@@ -11,15 +11,19 @@ namespace Flip.PlayerControll
         [Header("Boolean")]
         public bool JumpPressed;
         public bool CrouchPressed;
+        public bool ClimbPressed;
         public bool IsGrounded;
         public bool IsJumping;
         public bool IsAccelerating;
         public bool CanJump;
+        public bool CanClimb;
         public bool RushJumping;
         public bool NormalJumping;
         [Space]
         [Header("Int")]
         public int JumpCount;
+
+        private RaycastHit2D[] hitInfo;
 
         #endregion
 
@@ -79,6 +83,7 @@ namespace Flip.PlayerControll
             {
                 CrouchPressed = false;
             }
+
         }
 
         #endregion
