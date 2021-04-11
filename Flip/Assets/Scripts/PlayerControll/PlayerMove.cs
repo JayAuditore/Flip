@@ -25,10 +25,16 @@ namespace Flip.PlayerControll
         public float ClimbSpeed;
         public float AugmentedVelocity;
         [Space]
+        [Header("Bool")]
+        public bool LeftFoot;
+        public bool RightFoot;
+        [Space]
         [Header("Component")]
-        public Transform GroundCheck;
-        public Transform CeilingCheck;
-        public BoxCollider2D Coll;
+        public CapsuleCollider2D Coll;
+        public Transform Ground1;
+        public Transform Ground2;
+        public Transform Ceiling1;
+        public Transform Ceiling2;
         [Space]
         public LayerMask Ground;
 
@@ -44,8 +50,7 @@ namespace Flip.PlayerControll
 
         void Update()
         {
-            playerInput.IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.1f, Ground);
-            playerInput.CanJump = !Physics2D.OverlapCircle(CeilingCheck.position, 0.1f, Ground);
+            GroundCheck();
             Crouch();
             Jump();
         }
@@ -58,6 +63,22 @@ namespace Flip.PlayerControll
         #endregion
 
         #region 方法
+
+        //地面检测
+        public void GroundCheck()
+        {
+            LeftFoot = Physics2D.OverlapCircle(Ground1.position, 0.1f, Ground);
+            RightFoot = Physics2D.OverlapCircle(Ground2.position, 0.1f, Ground);
+
+            if (!LeftFoot && !RightFoot)
+            {
+                playerInput.IsGrounded = false;
+            }
+            if (LeftFoot || RightFoot)
+            {
+                playerInput.IsGrounded = true;
+            }
+        }
 
         //计算速度
         public Vector2 CalculateVelocity()
@@ -103,6 +124,11 @@ namespace Flip.PlayerControll
                 //空中
                 else if (!playerInput.IsGrounded)
                 {
+                    //初速度为0
+                    if (rb.velocity.x * horizontalMove == 0)
+                    {
+                        Velocity = new Vector2(horizontalMove * Speed, rb.velocity.y);
+                    }
                     //同向移动
                     if (rb.velocity.x * horizontalMove > 0)
                     {
@@ -118,7 +144,7 @@ namespace Flip.PlayerControll
             //无左右输入
             else if (horizontalMove == 0)
             {
-                slowDownTimer += Time.fixedDeltaTime * (1 / 5f);
+                slowDownTimer += Time.fixedDeltaTime * (1 / 0.2f);
                 Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, slowDownTimer), rb.velocity.y);
             }
 

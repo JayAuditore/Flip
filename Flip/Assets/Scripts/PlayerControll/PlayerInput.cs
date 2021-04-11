@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace Flip.PlayerControll
 {
     public class PlayerInput : MonoBehaviour
     {
-        #region ×Ö¶Î
+        #region å­—æ®µ
 
         [Header("Boolean")]
         public bool JumpPressed;
@@ -27,7 +27,7 @@ namespace Flip.PlayerControll
 
         #endregion
 
-        #region Unity»Øµ÷
+        #region Unityå›žè°ƒ
 
         void Update()
         {
@@ -36,11 +36,11 @@ namespace Flip.PlayerControll
 
         #endregion
 
-        #region ·½·¨
+        #region æ–¹æ³•
 
         public void SwitchMovement()
         {
-            //ÌøÔ¾
+            //è·³è·ƒ
             if (Input.GetButtonDown("Jump") && JumpCount > 0)
             {
                 JumpPressed = true;
@@ -64,7 +64,7 @@ namespace Flip.PlayerControll
                 NormalJumping = false;
             }
 
-            //¼ÓËÙ
+            //åŠ é€Ÿ
             if (Input.GetKey(KeyCode.LeftShift) && IsGrounded)
             {
                 IsAccelerating = true;
@@ -74,7 +74,7 @@ namespace Flip.PlayerControll
                 IsAccelerating = false;
             }
 
-            //¶×ÏÂ
+            //è¹²ä¸‹
             if (Input.GetKeyDown(KeyCode.S))
             {
                 CrouchPressed = true;
