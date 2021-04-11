@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Front
+  - Back
   layers:
   - Default
   - TransparentFX
@@ -11,11 +13,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Square
+  - Ground
   - 
   - 
-  - 
-  - 
+  - Player
+  - BackNonCollision
   - 
   - 
   - 
@@ -40,7 +42,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Square
-    uniqueID: 3235802097
     locked: 0
