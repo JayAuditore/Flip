@@ -8,19 +8,28 @@ namespace Flip.PlayerControll
     {
         #region 字段
 
+        [Header("Boolean")]
         public bool JumpPressed;
         public bool CrouchPressed;
-        public int JumpCount;
+        public bool ClimbPressed;
         public bool IsGrounded;
         public bool IsJumping;
         public bool IsAccelerating;
-        public bool IsCrouching;
         public bool CanJump;
+        public bool CanClimb;
+        public bool RushJumping;
+        public bool NormalJumping;
+        [Space]
+        [Header("Int")]
+        public int JumpCount;
+
+        private RaycastHit2D[] hitInfo;
 
         #endregion
 
         #region Unity回调
-        private void Update()
+
+        void Update()
         {
             SwitchMovement();
         }
@@ -31,11 +40,31 @@ namespace Flip.PlayerControll
 
         public void SwitchMovement()
         {
+            //跳跃
             if (Input.GetButtonDown("Jump") && JumpCount > 0)
             {
                 JumpPressed = true;
+
+                if (JumpPressed)
+                {
+                    if (IsAccelerating)
+                    {
+                        RushJumping = true;
+                    }
+                    else
+                    {
+                        NormalJumping = true;
+                    }
+                }
+            }
+            else
+            {
+                JumpPressed = false;
+                RushJumping = false;
+                NormalJumping = false;
             }
 
+            //加速
             if (Input.GetKey(KeyCode.LeftShift) && IsGrounded)
             {
                 IsAccelerating = true;
@@ -45,6 +74,7 @@ namespace Flip.PlayerControll
                 IsAccelerating = false;
             }
 
+            //蹲下
             if (Input.GetKeyDown(KeyCode.S))
             {
                 CrouchPressed = true;
@@ -53,6 +83,7 @@ namespace Flip.PlayerControll
             {
                 CrouchPressed = false;
             }
+
         }
 
         #endregion

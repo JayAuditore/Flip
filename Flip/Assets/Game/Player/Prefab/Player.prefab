@@ -86,7 +86,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,7 +106,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -130,10 +130,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6f85e8d843a5d449754b8287c4a90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelerationTime: 0.1
+  AccelerationTime: 0.2
   JumpForce: 8
+  RushJumpForce: 11
   Speed: 5
   CrouchSpeed: 2.5
+  ClimbSpeed: 0
   AugmentedVelocity: 10
   GroundCheck: {fileID: 991970162815875148}
   CeilingCheck: {fileID: 991970161093788685}
@@ -202,12 +204,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpPressed: 0
   CrouchPressed: 0
-  JumpCount: 1
+  ClimbPressed: 0
   IsGrounded: 0
   IsJumping: 0
   IsAccelerating: 0
-  IsCrouching: 0
   CanJump: 0
+  CanClimb: 0
+  RushJumping: 0
+  NormalJumping: 0
+  JumpCount: 1
 --- !u!1 &991970162815875149
 GameObject:
   m_ObjectHideFlags: 0

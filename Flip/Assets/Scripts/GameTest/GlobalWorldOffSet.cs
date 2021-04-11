@@ -5,11 +5,11 @@ using Flip.Module;
 public class GlobalWorldOffSet : BaseSingletonWithMono<GlobalWorldOffSet>
 {
     public Vector3 WorldOffSet => worldOffSet;
-    [SerializeField] private Transform mainWorld;
-    [SerializeField] private Transform offWorld;
+    [SerializeField] private Transform frontWorld;
+    [SerializeField] private Transform backWorld;
     private Vector3 worldOffSet;
     private void Start()
     {
-        worldOffSet = mainWorld.transform.position - offWorld.transform.position;
+        worldOffSet = frontWorld.transform.position - backWorld.transform.position;
     }
 }
