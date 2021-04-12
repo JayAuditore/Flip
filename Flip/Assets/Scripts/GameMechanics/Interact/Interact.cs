@@ -1,12 +1,12 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Flip.DeWei
+namespace Flip.Interact
 {
     public class Interact
     {
-        #region ����
+        #region 单例
         private Interact() { }
         public static class InteractInstance
         {
@@ -17,11 +17,12 @@ namespace Flip.DeWei
             return InteractInstance.instance;
         }
         #endregion
-        #region �ֶ�
-        public delegate void funtion();         //ί�еķ���
-        public static Collider2D[] _collider2D;    //��⵽������
+        #region 字段
+        public delegate void funtion();         //委托的方法
+        public static Collider2D[] _collider2D;    //检测到的物体
         #endregion
 
+        //funtion1指的是检测到后就调用的方法，funtion2指的是没有检测就调用的方法，
         public void Interacting(GameObject target, float radius, string colliderMask)
         {
             _collider2D = Physics2D.OverlapCircleAll(target.transform.position, radius, LayerMask.GetMask(colliderMask));

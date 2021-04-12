@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace Flip.DeWei
+namespace Flip.Interact
 {
     public class InteractingWithObjects : MonoBehaviour
     {
@@ -20,12 +20,12 @@ namespace Flip.DeWei
         {
             Interact.GetInstance().Interacting(this.gameObject, 2, "Square", TextSetTrue, TextSetFalse);
         }
-        public void TextSetTrue()   //Èç¹û¼ì²âµ½¾ÍÖ´ÐÐ
+        public void TextSetTrue()   //å¦‚æžœæ£€æµ‹åˆ°å°±æ‰§è¡Œ
         {
             text.gameObject.SetActive(true);
             text.rectTransform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 1.5f, 0));
         }
-        public void TextSetFalse()  //Ã»ÓÐ¼ì²âµ½¾ÍÖ´ÐÐ
+        public void TextSetFalse()  //æ²¡æœ‰æ£€æµ‹åˆ°å°±æ‰§è¡Œ
         {
             text.gameObject.SetActive(false);
         }
