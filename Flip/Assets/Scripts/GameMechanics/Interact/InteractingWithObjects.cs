@@ -9,6 +9,7 @@ namespace Flip.Interact
     public class InteractingWithObjects : MonoBehaviour
     {
         public TMP_Text text;
+        public string colliderLayer;//检测物品所在的图层
         // Start is called before the first frame update
         void Start()
         {
@@ -18,7 +19,7 @@ namespace Flip.Interact
         // Update is called once per frame
         void Update()
         {
-            Interact.GetInstance().Interacting(this.gameObject, 2, "Square", TextSetTrue, TextSetFalse);
+            Interact.GetInstance().Interacting(this.gameObject, 2, colliderLayer, TextSetTrue, TextSetFalse);
         }
         public void TextSetTrue()   //如果检测到就执行
         {

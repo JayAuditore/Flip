@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace Flip.Interact
 {
     public class Interact
@@ -22,7 +21,7 @@ namespace Flip.Interact
         public static Collider2D[] _collider2D;    //检测到的物体
         #endregion
 
-        //funtion1指的是检测到后就调用的方法，funtion2指的是没有检测就调用的方法，
+        //target表示检测到的物品，rads代表检测的范围，collidermask表示要检测的图层,funtion1指的是检测到后就调用的方法，funtion2指的是没有检测就调用的方法
         public void Interacting(GameObject target, float radius, string colliderMask)
         {
             _collider2D = Physics2D.OverlapCircleAll(target.transform.position, radius, LayerMask.GetMask(colliderMask));
