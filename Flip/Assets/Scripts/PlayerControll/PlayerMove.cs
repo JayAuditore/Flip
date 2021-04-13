@@ -90,6 +90,8 @@ namespace Flip.PlayerControll
             {
                 slowDownTimer = 0;
 
+                transform.localScale = new Vector3(horizontalMove, 1, 1);
+
                 //地面上
                 if (playerInput.IsGrounded)
                 {

@@ -19,6 +19,7 @@ namespace Flip.PlayerControll
         public bool CanClimb;
         public bool RushJumping;
         public bool NormalJumping;
+        public bool CanControl = true;
         [Space]
         [Header("Int")]
         public int JumpCount;
@@ -31,7 +32,14 @@ namespace Flip.PlayerControll
 
         void Update()
         {
-            SwitchMovement();
+            if (CancelControl())
+            {
+                return;
+            }
+            else if (AllowControl())
+            {
+                SwitchMovement();
+            }
         }
 
         #endregion
@@ -83,7 +91,18 @@ namespace Flip.PlayerControll
             {
                 CrouchPressed = false;
             }
+        }
 
+        //禁止玩家操作
+        public bool CancelControl()
+        {
+            return CanControl = false;
+        }
+
+        //开启玩家操作
+        public bool AllowControl()
+        {
+            return CanControl = true;
         }
 
         #endregion
