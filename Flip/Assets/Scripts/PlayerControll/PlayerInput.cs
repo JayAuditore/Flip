@@ -1,34 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Flip.Module;
 
 namespace Flip.PlayerControll
 {
-    public class PlayerInput : MonoBehaviour
+    public class PlayerInput : BaseSingletonWithMono<PlayerInput>
     {
-        #region 字段
-
-        [Header("Boolean")]
-        public bool JumpPressed;
-        public bool CrouchPressed;
-        public bool ClimbPressed;
-        public bool IsGrounded;
-        public bool IsJumping;
-        public bool IsAccelerating;
-        public bool CanJump;
-        public bool CanClimb;
-        public bool RushJumping;
-        public bool NormalJumping;
-        public bool CanControl = true;
-        [Space]
-        [Header("Int")]
-        public int JumpCount;
-
-        private RaycastHit2D[] hitInfo;
-
-        #endregion
+        private EntityInput entityInput;
 
         #region Unity回调
+
+        void Awake()
+        {
+            entityInput = GetComponent<EntityInput>();
+        }
 
         void Update()
         {
@@ -49,60 +35,60 @@ namespace Flip.PlayerControll
         public void SwitchMovement()
         {
             //跳跃
-            if (Input.GetButtonDown("Jump") && JumpCount > 0)
+            if (Input.GetButtonDown("Jump") && entityInput.JumpCount > 0)
             {
-                JumpPressed = true;
+                entityInput.JumpPressed = true;
 
-                if (JumpPressed)
+                if (entityInput.JumpPressed)
                 {
-                    if (IsAccelerating)
+                    if (entityInput.IsAccelerating)
                     {
-                        RushJumping = true;
+                        entityInput.RushJumping = true;
                     }
                     else
                     {
-                        NormalJumping = true;
+                        entityInput.NormalJumping = true;
                     }
                 }
             }
             else
             {
-                JumpPressed = false;
-                RushJumping = false;
-                NormalJumping = false;
+                entityInput.JumpPressed = false;
+                entityInput.RushJumping = false;
+                entityInput.NormalJumping = false;
             }
 
             //加速
-            if (Input.GetKey(KeyCode.LeftShift) && IsGrounded)
+            if (Input.GetKey(KeyCode.LeftShift) && entityInput.IsGrounded)
             {
-                IsAccelerating = true;
+                entityInput.IsAccelerating = true;
             }
             else
             {
-                IsAccelerating = false;
+                entityInput.IsAccelerating = false;
             }
 
             //蹲下
             if (Input.GetKeyDown(KeyCode.S))
             {
-                CrouchPressed = true;
+                entityInput.CrouchPressed = true;
             }
             if (Input.GetKeyUp(KeyCode.S))
             {
-                CrouchPressed = false;
+                entityInput.CrouchPressed = false;
             }
         }
 
         //禁止玩家操作
         public bool CancelControl()
         {
-            return CanControl = false;
+            return entityInput.CanControl = false;
         }
 
         //开启玩家操作
         public bool AllowControl()
         {
-            return CanControl = true;
+            return entityInput.CanControl = true;
         }
 
         #endregion

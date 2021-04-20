@@ -102,8 +102,9 @@ GameObject:
   - component: {fileID: 991970161488313115}
   - component: {fileID: 991970161488313108}
   - component: {fileID: 991970161488313113}
-  - component: {fileID: 991970161488313112}
   - component: {fileID: 749175337}
+  - component: {fileID: 1364163529}
+  - component: {fileID: 1364163534}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -197,7 +198,6 @@ MonoBehaviour:
   RushJumpForce: 11
   Speed: 5
   CrouchSpeed: 2.5
-  ClimbSpeed: 0
   AugmentedVelocity: 10
   LeftFoot: 0
   RightFoot: 0
@@ -230,30 +230,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &991970161488313112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991970161488313110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 817738a56b6c9524688f08d3e4c78c1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  JumpPressed: 0
-  CrouchPressed: 0
-  ClimbPressed: 0
-  IsGrounded: 0
-  IsJumping: 0
-  IsAccelerating: 0
-  CanJump: 0
-  CanClimb: 0
-  RushJumping: 0
-  NormalJumping: 0
-  CanControl: 1
-  JumpCount: 1
 --- !u!70 &749175337
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -270,6 +246,41 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.0031189919}
   m_Size: {x: 1, y: 1.006238}
   m_Direction: 0
+--- !u!114 &1364163529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991970161488313110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817738a56b6c9524688f08d3e4c78c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1364163534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991970161488313110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624cb44eb4b03054492cf316b2dd2861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpPressed: 0
+  CrouchPressed: 0
+  ClimbPressed: 0
+  IsGrounded: 0
+  IsJumping: 0
+  IsAccelerating: 0
+  CanJump: 0
+  RushJumping: 0
+  NormalJumping: 0
+  CanControl: 1
+  JumpCount: 0
 --- !u!1 &991970162815875149
 GameObject:
   m_ObjectHideFlags: 0
