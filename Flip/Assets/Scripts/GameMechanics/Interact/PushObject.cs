@@ -29,11 +29,9 @@ namespace Flip.Interact
         public void Canpush()//检测到之后要做的事情
         {
 
-            Debug.Log(RaycastHit2D[0].transform.name);
             if (entityInput.IsPushing && ((RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0))
             {
-                Debug.Log("1");
-                RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime, 0, 0);
+                RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
                 
             }
             else

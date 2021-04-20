@@ -115,7 +115,7 @@ namespace Flip.PlayerControll
                     else if (entityInput.IsPushing)
                     {
                         crouchTimer += Time.fixedDeltaTime * (1 / 0.2f);
-                        Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, horizontalMove * PushingSpeed, crouchTimer), rb.velocity.y);
+                        Velocity = new Vector2(horizontalMove * PushingSpeed, rb.velocity.y);
                     }
                     //正常走
                     else
