@@ -10,7 +10,6 @@ namespace Flip.Interact
         #region 字段
         // TODO: 增加一个地面检测
         public float Velocity;
-        //public string LayerMask;
         public LayerMask LayerMask;
         public RaycastHit2D[] RaycastHit2D;
 
