@@ -1,89 +1,94 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Flip.Module;
 
 namespace Flip.PlayerControll
 {
-    public class PlayerInput : MonoBehaviour
+    public class PlayerInput : BaseSingletonWithMono<PlayerInput>
     {
-        #region ◊÷∂Œ
+        private EntityInput entityInput;
 
-        [Header("Boolean")]
-        public bool JumpPressed;
-        public bool CrouchPressed;
-        public bool ClimbPressed;
-        public bool IsGrounded;
-        public bool IsJumping;
-        public bool IsAccelerating;
-        public bool CanJump;
-        public bool CanClimb;
-        public bool RushJumping;
-        public bool NormalJumping;
-        [Space]
-        [Header("Int")]
-        public int JumpCount;
+        #region UnityÂõûË∞É
 
-        private RaycastHit2D[] hitInfo;
-
-        #endregion
-
-        #region Unityªÿµ˜
+        void Awake()
+        {
+            entityInput = GetComponent<EntityInput>();
+        }
 
         void Update()
         {
-            SwitchMovement();
+            if (CancelControl())
+            {
+                return;
+            }
+            else if (AllowControl())
+            {
+                SwitchMovement();
+            }
         }
 
         #endregion
 
-        #region ∑Ω∑®
+        #region ÊñπÊ≥ï
 
         public void SwitchMovement()
         {
-            //Ã¯‘æ
-            if (Input.GetButtonDown("Jump") && JumpCount > 0)
+            //Ë∑≥Ë∑É
+            if (Input.GetButtonDown("Jump") && entityInput.JumpCount > 0)
             {
-                JumpPressed = true;
+                entityInput.JumpPressed = true;
 
-                if (JumpPressed)
+                if (entityInput.JumpPressed)
                 {
-                    if (IsAccelerating)
+                    if (entityInput.IsAccelerating)
                     {
-                        RushJumping = true;
+                        entityInput.RushJumping = true;
                     }
                     else
                     {
-                        NormalJumping = true;
+                        entityInput.NormalJumping = true;
                     }
                 }
             }
             else
             {
-                JumpPressed = false;
-                RushJumping = false;
-                NormalJumping = false;
+                entityInput.JumpPressed = false;
+                entityInput.RushJumping = false;
+                entityInput.NormalJumping = false;
             }
 
-            //º”ÀŸ
-            if (Input.GetKey(KeyCode.LeftShift) && IsGrounded)
+            //Âä†ÈÄü
+            if (Input.GetKey(KeyCode.LeftShift) && entityInput.IsGrounded)
             {
-                IsAccelerating = true;
+                entityInput.IsAccelerating = true;
             }
             else
             {
-                IsAccelerating = false;
+                entityInput.IsAccelerating = false;
             }
 
-            //∂◊œ¬
+            //Ëπ≤‰∏ã
             if (Input.GetKeyDown(KeyCode.S))
             {
-                CrouchPressed = true;
+                entityInput.CrouchPressed = true;
             }
             if (Input.GetKeyUp(KeyCode.S))
             {
-                CrouchPressed = false;
+                entityInput.CrouchPressed = false;
             }
+        }
 
+        //Á¶ÅÊ≠¢Áé©ÂÆ∂Êìç‰Ωú
+        public bool CancelControl()
+        {
+            return entityInput.CanControl = false;
+        }
+
+        //ÂºÄÂêØÁé©ÂÆ∂Êìç‰Ωú
+        public bool AllowControl()
+        {
+            return entityInput.CanControl = true;
         }
 
         #endregion
