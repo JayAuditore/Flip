@@ -9,11 +9,11 @@ namespace Flip.Interact
         private Interact() { }
         public static class InteractInstance
         {
-            public static Interact instance = new Interact();
+            public static Interact Instance = new Interact();
         }
         public static Interact GetInstance()
         {
-            return InteractInstance.instance;
+            return InteractInstance.Instance;
         }
         #endregion
         #region 字段

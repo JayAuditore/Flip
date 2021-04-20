@@ -77,6 +77,16 @@ namespace Flip.PlayerControll
             {
                 entityInput.CrouchPressed = false;
             }
+
+            //推箱子
+            if (Input.GetKey(KeyCode.F))
+            {
+                entityInput.IsPushing = true;
+            }
+            else
+            {
+                entityInput.IsPushing = false;
+            }
         }
 
         //禁止玩家操作

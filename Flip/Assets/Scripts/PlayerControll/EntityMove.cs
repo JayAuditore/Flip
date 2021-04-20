@@ -23,6 +23,7 @@ namespace Flip.PlayerControll
         public float Speed;
         public float CrouchSpeed;
         public float AugmentedVelocity;
+        public float PushingSpeed;
         [Space]
         [Header("Bool")]
         public bool LeftFoot;
@@ -43,7 +44,7 @@ namespace Flip.PlayerControll
 
         void Awake()
         {
-            entityInput =GetComponent<EntityInput>();
+            entityInput = GetComponent<EntityInput>();
         }
 
         void Start()
@@ -109,6 +110,12 @@ namespace Flip.PlayerControll
                     {
                         crouchTimer += Time.fixedDeltaTime * (1 / 0.2f);
                         Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, horizontalMove * CrouchSpeed, crouchTimer), rb.velocity.y);
+                    }
+                    //推箱子
+                    else if (entityInput.IsPushing)
+                    {
+                        crouchTimer += Time.fixedDeltaTime * (1 / 0.2f);
+                        Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, horizontalMove * PushingSpeed, crouchTimer), rb.velocity.y);
                     }
                     //正常走
                     else

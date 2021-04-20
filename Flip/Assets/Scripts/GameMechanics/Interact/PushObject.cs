@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Flip.PlayerControll;
 
 namespace Flip.Interact
 {
@@ -8,20 +9,33 @@ namespace Flip.Interact
     {
         #region 字段
         // TODO: 增加一个地面检测
-        public string layerMask;
-        public RaycastHit2D[] raycastHit2D;
-        #endregion
-    
+        public float Velocity;
+        //public string LayerMask;
+        public LayerMask LayerMask;
+        public RaycastHit2D[] RaycastHit2D;
 
-        public void Update()
+
+        private EntityInput entityInput;
+        #endregion
+
+        private void Awake()
         {
-            Push(this.gameObject, 1.5f, layerMask);
+            entityInput = GetComponent<EntityInput>();   
+        }
+        
+        public void FixedUpdate()
+        {
+            Push(this.gameObject, 1.5f, LayerMask);
         }
         public void Canpush()//检测到之后要做的事情
         {
-            if (Input.GetKey(KeyCode.F) && ((raycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0))
+
+            Debug.Log(RaycastHit2D[0].transform.name);
+            if (entityInput.IsPushing && ((RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0))
             {
-                raycastHit2D[0].transform.position = raycastHit2D[0].transform.position + new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime, 0, 0);
+                Debug.Log("1");
+                RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime, 0, 0);
+                
             }
             else
             {
@@ -29,10 +43,10 @@ namespace Flip.Interact
 
         }
         //target表示检测到的物品，rads代表检测的范围，collidermask表示要检测的图层
-        public void Push(GameObject target, float rads, string collidermask)
+        public void Push(GameObject target, float rads, LayerMask collidermask)
         {
-            raycastHit2D = Physics2D.RaycastAll(target.transform.position + new Vector3(0, 2, 0), new Vector3(1, 0, 0) * transform.localScale.x, rads, LayerMask.GetMask(collidermask));
-            if (raycastHit2D.Length > 0)
+            RaycastHit2D = Physics2D.RaycastAll(target.transform.position , new Vector3(1, 0, 0) * transform.localScale.x, rads, LayerMask);
+            if (RaycastHit2D.Length > 0)
             {
                 Canpush();
             }

@@ -19,6 +19,7 @@ namespace Flip.PlayerControll
         public bool RushJumping;
         public bool NormalJumping;
         public bool CanControl = true;
+        public bool IsPushing;
         [Space]
         [Header("Int")]
         public int JumpCount;
