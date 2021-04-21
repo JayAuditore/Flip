@@ -21,10 +21,17 @@ EditorUserSettings:
       value: 22424703114646680e0b0227036c78111b122b2929262323621d0f32ebee3d36e5a73aecf13f33722c0ce6281d
       flags: 0
     RecentlyUsedScenePath-5:
+<<<<<<< Updated upstream
       value: 22424703114646680e0b0227036c6b15171a352f212a23223e663932f4e93076f7e93ffdfe
       flags: 0
     RecentlyUsedScenePath-6:
       value: 22424703114646680e0b0227036c6b15171a352f212a23223e663732fbdf152de6ee22e6f53f7129370bfb25
+=======
+      value: 22424703114646680e0b0227036c6b15171a352f212a23223e663732fbdf152de6ee22e6f53f7129370bfb25
+      flags: 0
+    RecentlyUsedScenePath-6:
+      value: 22424703114646680e0b0227036c6b15171a352f212a23223e663932f4e93076f7e93ffdfe
+>>>>>>> Stashed changes
       flags: 0
     RecentlyUsedScenePath-7:
       value: 22424703114646680e0b0227036c6b15171a352f212a23223e663b36ebc63131acf238e0f323

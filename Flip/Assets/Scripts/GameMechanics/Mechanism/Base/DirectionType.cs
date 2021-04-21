@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Flip.GameMechanics
 {
-    public interface IReversible
+    public enum DirectionType
     {
-        void Reverse();
+        // 正面
+        Front,
+        // 反面
+        Back
     }
+
 }
