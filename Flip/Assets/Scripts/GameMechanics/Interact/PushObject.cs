@@ -61,9 +61,12 @@ namespace Flip.Interact
             }
             else
             {
-                rigidbody2DOfObject.mass = 100;
-                rigidbody2DOfObject.velocity = new Vector2(0, 0);
-                rigidbody2DOfObject = null;
+                if (rigidbody2DOfObject)
+                {
+                    rigidbody2DOfObject.mass = 100;
+                    rigidbody2DOfObject.velocity = new Vector2(0, 0);
+                    rigidbody2DOfObject = null;
+                }
             }
         }
 
