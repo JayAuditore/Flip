@@ -21,7 +21,7 @@ namespace Flip.Interact
 
         #region Unity回调
 
-        public void FixedUpdate()
+        public void Update()
         {
             Push(this.gameObject, 0.51f, LayerMask);
         }
