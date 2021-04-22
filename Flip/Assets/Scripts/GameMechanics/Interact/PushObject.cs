@@ -14,6 +14,7 @@ namespace Flip.Interact
         public LayerMask LayerMask;
         public RaycastHit2D[] RaycastHit2D;
 
+        private Rigidbody2D rigidbody2DOfObject;    
         private EntityInput entityInput;
 
         #endregion
@@ -39,11 +40,14 @@ namespace Flip.Interact
         {
             if (entityInput.IsPushing && ((RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0))
             {
-                RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
+                rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
+                rigidbody2DOfObject.mass = 0.1f;
+                //RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
             }
             else
             {
-
+                rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
+                rigidbody2DOfObject.mass = 100;
             }
         }
 
