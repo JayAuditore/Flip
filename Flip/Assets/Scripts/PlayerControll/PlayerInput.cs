@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Flip.Module;
-using Flip.Interact;
 
 namespace Flip.PlayerControll
 {
     public class PlayerInput : BaseSingletonWithMono<PlayerInput>
     {
         private EntityInput entityInput;
-        private PushObject pushObject;
 
         #region Unity回调
 
         void Awake()
         {
             entityInput = GetComponent<EntityInput>();
-            pushObject = GetComponent<PushObject>();
         }
 
         void Update()
@@ -82,7 +79,7 @@ namespace Flip.PlayerControll
             }
 
             //推箱子
-            if (pushObject.IsPushing)
+            if (Input.GetKey(KeyCode.F))
             {
                 entityInput.IsPushing = true;
             }
