@@ -23,7 +23,7 @@ namespace Flip.Interact
 
         public void FixedUpdate()
         {
-            Push(this.gameObject, 1.5f, LayerMask);
+            Push(this.gameObject, 0.51f, LayerMask);
         }
 
         #endregion
@@ -40,14 +40,11 @@ namespace Flip.Interact
                 //下面的我看不懂
                 if ((RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0)
                 {
-                    rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
                     rigidbody2DOfObject.mass = 0.1f;
                     //RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
                 }
                 else
                 {
-                    rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
-                    rigidbody2DOfObject.mass = 100;
                 }
             }
         }
@@ -59,12 +56,18 @@ namespace Flip.Interact
 
             if (RaycastHit2D.Length > 0)
             {
+                rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
                 Canpush();
+            }
+            else
+            {
+                rigidbody2DOfObject.mass = 100;
+                rigidbody2DOfObject.velocity = new Vector2(0, 0);
+                rigidbody2DOfObject = null;
             }
         }
 
         #endregion
     }
 }
-
 
