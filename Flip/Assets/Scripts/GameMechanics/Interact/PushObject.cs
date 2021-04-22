@@ -13,7 +13,7 @@ namespace Flip.Interact
         public LayerMask LayerMask;
         public RaycastHit2D[] RaycastHit2D;
 
-        private Rigidbody2D rigidbody2DOfObject;
+
         private EntityInput entityInput;
         #endregion
 
@@ -31,13 +31,11 @@ namespace Flip.Interact
 
             if (entityInput.IsPushing && ((RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0))
             {
-                //RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
-                rigidbody2DOfObject.mass = 0.1f;
+                RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
+                
             }
             else
             {
-                rigidbody2DOfObject.mass = 100;
-                rigidbody2DOfObject.velocity = new Vector3(0, 0, 0);
             }
 
         }
@@ -47,15 +45,7 @@ namespace Flip.Interact
             RaycastHit2D = Physics2D.RaycastAll(target.transform.position , new Vector3(1, 0, 0) * transform.localScale.x, rads, LayerMask);
             if (RaycastHit2D.Length > 0)
             {
-                if (rigidbody2DOfObject == null)
-                {
-                    rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
-                }
                 Canpush();
-            }
-            else
-            {
-                rigidbody2DOfObject = null;
             }
         }
     }
