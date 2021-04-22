@@ -78,7 +78,7 @@ namespace Flip.PlayerControll
             {
                 entityInput.IsGrounded = false;
             }
-            if (LeftFoot || RightFoot)
+            else if (LeftFoot || RightFoot)
             {
                 entityInput.IsGrounded = true;
             }
@@ -114,12 +114,13 @@ namespace Flip.PlayerControll
                     //推箱子
                     else if (entityInput.IsPushing)
                     {
-                        crouchTimer += Time.fixedDeltaTime * (1 / 0.2f);
+                        Debug.Log("2");
                         Velocity = new Vector2(horizontalMove * PushingSpeed, rb.velocity.y);
                     }
                     //正常走
                     else
                     {
+                        Debug.Log("1");
                         Velocity = new Vector2(horizontalMove * Speed, rb.velocity.y);
                     }
 

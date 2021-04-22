@@ -576,6 +576,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 991970161488313108, guid: 115ae0d6f606b634ea5c349d75560aa0, type: 3}
+      propertyPath: PushingSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 991970161488313110, guid: 115ae0d6f606b634ea5c349d75560aa0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -626,3 +630,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 115ae0d6f606b634ea5c349d75560aa0, type: 3}
+--- !u!1 &991970162270114372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 991970161488313110, guid: 115ae0d6f606b634ea5c349d75560aa0, type: 3}
+  m_PrefabInstance: {fileID: 991970162270114371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &991970162270114373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991970162270114372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4c350b09a23fe4a818a0a052877328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Velocity: 3
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
