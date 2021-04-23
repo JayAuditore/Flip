@@ -12,16 +12,8 @@ public class BaseEnermy : MonoBehaviour
     public float heightOffSet;          // 高度差值
     public LayerMask lookLayer;
     public LayerMask occlusionLayer;
-    private BaseState currentState;
-    private PatrolState patrol = new PatrolState();
-    private FollowState follow = new FollowState();
-    private void Start()
-    {
-        currentState = patrol;
-    }
     private void Update()
     {
-        currentState.OnStateStay();
         Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, lookDistance, lookLayer);
         Vector3 startVec = transform.position + new Vector3(0, heightOffSet, 0);
         Vector3 endVec = transform.position + new Vector3(lookDistance - lookOffSet, heightOffSet, 0);
@@ -29,26 +21,19 @@ public class BaseEnermy : MonoBehaviour
         // 视线被遮挡或检测不到玩家
         if (sceneObj.collider != null || playerCollider == null)
         {
-            ChangeState(patrol);
+            // 切换到巡逻状态
             return;
         }
         // 判断是否再检测距离内
         Vector3 offSetVec = (transform.position - new Vector3(lookOffSet, 0, 0));
         if (playerCollider.transform.position.x - transform.position.x > 0 && Mathf.Abs(Vector2.SignedAngle(transform.position - offSetVec, playerCollider.transform.position - offSetVec)) < lookAngle)
         {
-            ChangeState(follow);
+            // 切换到追踪状态
         }
         else
         {
-            ChangeState(patrol);
+            // 切换到巡逻状态
         }
-    }
-    private void ChangeState(BaseState newState)
-    {
-        if (currentState == newState) return;
-        currentState.OnStateExit();
-        currentState = newState;
-        currentState.OnStateEnter();
     }
     private void OnDrawGizmosSelected()
     {
