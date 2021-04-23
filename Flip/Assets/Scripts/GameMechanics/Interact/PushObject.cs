@@ -57,7 +57,7 @@ namespace Flip.Interact
                 }
                 else
                 {
-                    return;
+                    IsPushing = false;
                 }
             }
             else
@@ -70,7 +70,7 @@ namespace Flip.Interact
                 }
                 else
                 {
-                    return;
+                    IsPushing = false;
                 }
             }
         }
