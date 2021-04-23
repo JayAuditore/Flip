@@ -40,6 +40,9 @@ namespace Flip.Interact
             }
             else
             {
+                rigidbody2DOfObject.mass = 10000;
+                rigidbody2DOfObject.velocity = new Vector2(0, 0);
+                rigidbody2DOfObject = null;
                 IsPushing = false;
             }
         }
@@ -48,33 +51,22 @@ namespace Flip.Interact
         public void Push(GameObject target, float rads, LayerMask collidermask)
         {
             RaycastHit2D = Physics2D.RaycastAll(target.transform.position, new Vector2(1, 0) * transform.localScale.x, rads, LayerMask);
-            if (RaycastHit2D.Length > 0)
+            if (RaycastHit2D.Length > 0&&RaycastHit2D[0].transform.CompareTag("Box"))
             {
-                if (RaycastHit2D[0].transform.CompareTag("Box"))
-                {
-                    rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
-                    Canpush();
-                }
-                else
-                {
-                    IsPushing = false;
-                }
+                rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
+                Canpush();
             }
             else
             {
+                IsPushing = false;
                 if (rigidbody2DOfObject)
                 {
                     rigidbody2DOfObject.mass = 10000;
                     rigidbody2DOfObject.velocity = new Vector2(0, 0);
                     rigidbody2DOfObject = null;
                 }
-                else
-                {
-                    IsPushing = false;
-                }
             }
         }
-
         #endregion
     }
 }
