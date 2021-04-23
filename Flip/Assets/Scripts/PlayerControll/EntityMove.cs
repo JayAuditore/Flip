@@ -99,13 +99,8 @@ namespace Flip.PlayerControll
                 //地面上
                 if (entityInput.IsGrounded)
                 {
-                    //推箱子
-                    if (entityInput.IsPushing)
-                    {
-                        Velocity = new Vector2(horizontalMove * PushingSpeed, rb.velocity.y);
-                    }
                     //冲刺
-                    else if (entityInput.IsAccelerating)
+                    if (entityInput.IsAccelerating)
                     {
                         accelerationTimer += Time.fixedDeltaTime * (1 / AccelerationTime);
                         Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, AugmentedVelocity * horizontalMove, accelerationTimer), rb.velocity.y);
@@ -116,9 +111,16 @@ namespace Flip.PlayerControll
                         crouchTimer += Time.fixedDeltaTime * (1 / 0.2f);
                         Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, horizontalMove * CrouchSpeed, crouchTimer), rb.velocity.y);
                     }
+                    //推箱子
+                    else if (entityInput.IsPushing)
+                    {
+                        Debug.Log("2");
+                        Velocity = new Vector2(horizontalMove * PushingSpeed, rb.velocity.y);
+                    }
                     //正常走
                     else
                     {
+                        Debug.Log("1");
                         Velocity = new Vector2(horizontalMove * Speed, rb.velocity.y);
                     }
 
