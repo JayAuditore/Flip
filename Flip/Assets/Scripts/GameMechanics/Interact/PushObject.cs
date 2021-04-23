@@ -11,7 +11,6 @@ namespace Flip.Interact
 
         // TODO: 增加一个地面检测
         public bool IsPushing;
-        public float Velocity;
         public LayerMask LayerMask;
         public RaycastHit2D[] RaycastHit2D;
 
@@ -36,15 +35,16 @@ namespace Flip.Interact
             //检测键盘输入
             if (Input.GetKey(KeyCode.F))
             {
-                IsPushing = true;
                 //下面的我看不懂
                 if ((RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0)
                 {
+                    IsPushing = true;
                     rigidbody2DOfObject.mass = 0.1f;
                     //RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
                 }
                 else
                 {
+                    IsPushing = false;
                 }
             }
         }
@@ -53,19 +53,29 @@ namespace Flip.Interact
         public void Push(GameObject target, float rads, LayerMask collidermask)
         {
             RaycastHit2D = Physics2D.RaycastAll(target.transform.position, new Vector2(1, 0) * transform.localScale.x, rads, LayerMask);
-
             if (RaycastHit2D.Length > 0)
             {
-                rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
-                Canpush();
+                if (RaycastHit2D[0].transform.CompareTag("Box"))
+                {
+                    rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
+                    Canpush();
+                }
+                else
+                {
+                    return;
+                }
             }
             else
             {
                 if (rigidbody2DOfObject)
                 {
-                    rigidbody2DOfObject.mass = 100;
-                    rigidbody2DOfObject.velocity = new Vector2(0, 0);
+                    rigidbody2DOfObject.mass = 10000;
+                    rigidbody2DOfObject.velocity=new Vector2(0,0);
                     rigidbody2DOfObject = null;
+                }
+                else
+                {
+                    return;
                 }
             }
         }
