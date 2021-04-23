@@ -33,19 +33,14 @@ namespace Flip.Interact
         public void Canpush()
         {
             //检测键盘输入
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.F) && (RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0)
             {
-                //下面的我看不懂
-                if ((RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0)
-                {
-                    IsPushing = true;
-                    rigidbody2DOfObject.mass = 0.1f;
-                    //RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
-                }
-                else
-                {
-                    IsPushing = false;
-                }
+                IsPushing = true;
+                rigidbody2DOfObject.mass = 0.1f;
+            }
+            else
+            {
+                IsPushing = false;
             }
         }
 
@@ -70,7 +65,7 @@ namespace Flip.Interact
                 if (rigidbody2DOfObject)
                 {
                     rigidbody2DOfObject.mass = 10000;
-                    rigidbody2DOfObject.velocity=new Vector2(0,0);
+                    rigidbody2DOfObject.velocity = new Vector2(0, 0);
                     rigidbody2DOfObject = null;
                 }
                 else
