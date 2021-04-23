@@ -33,26 +33,21 @@ namespace Flip.Interact
         public void Canpush()
         {
             //检测键盘输入
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.F)&& (RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0)
             {
-                //下面的我看不懂
-                if ((RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0)
-                {
-                    IsPushing = true;
-                    rigidbody2DOfObject.mass = 0.1f;
-                    //RaycastHit2D[0].transform.position = RaycastHit2D[0].transform.position + new Vector3(Velocity * Time.fixedDeltaTime * transform.localScale.x, 0, 0);
-                }
-                else
-                {
-                    IsPushing = false;
-                }
+                IsPushing = true;
+                rigidbody2DOfObject.mass = 0.1f;
+            }
+            else
+            {
+                IsPushing = false;
             }
         }
 
         //target表示检测到的物品，rads代表检测的范围，collidermask表示要检测的图层
         public void Push(GameObject target, float rads, LayerMask collidermask)
         {
-            RaycastHit2D = Physics2D.RaycastAll(target.transform.position, new Vector2(1, 0) * transform.localScale.x, rads, LayerMask);
+            RaycastHit2D = Physics2D.RaycastAll(target.transform.position, new Vector2(1, 0) * transform.localScale.x, rads, collidermask);
             if (RaycastHit2D.Length > 0)
             {
                 if (RaycastHit2D[0].transform.CompareTag("Box"))
@@ -62,11 +57,12 @@ namespace Flip.Interact
                 }
                 else
                 {
-                    return;
+                    IsPushing = false;
                 }
             }
             else
             {
+                IsPushing = false;
                 if (rigidbody2DOfObject)
                 {
                     rigidbody2DOfObject.mass = 10000;
@@ -75,7 +71,6 @@ namespace Flip.Interact
                 }
                 else
                 {
-                    return;
                 }
             }
         }
