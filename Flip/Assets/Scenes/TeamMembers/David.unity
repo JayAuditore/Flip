@@ -682,7 +682,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPushing: 0
-  Velocity: 3
   LayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -771,7 +770,7 @@ GameObject:
   - component: {fileID: 1183664062}
   m_Layer: 6
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
