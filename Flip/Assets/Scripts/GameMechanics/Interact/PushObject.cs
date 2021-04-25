@@ -59,7 +59,7 @@ namespace Flip.Interact
             RaycastHit2D = Physics2D.RaycastAll(target.transform.position, new Vector2(1, 0) * transform.localScale.x, rads, LayerMask);
             if (RaycastHit2D.Length > 0&&RaycastHit2D[0].transform.CompareTag("Box"))
             {
-                if (!rigidbody2DOfObject)
+                if (Object.ReferenceEquals(rigidbody2DOfObject,null))
                 {
                     rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
                 }
@@ -68,7 +68,7 @@ namespace Flip.Interact
             else
             {
                 IsPushing = false;
-                if (rigidbody2DOfObject)
+                if (!Object.ReferenceEquals(rigidbody2DOfObject,null))
                 {
                     rigidbody2DOfObject.mass = 10000;
                     rigidbody2DOfObject.velocity = new Vector2(0, 0);
