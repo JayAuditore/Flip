@@ -35,15 +35,21 @@ namespace Flip.Interact
             //检测键盘输入
             if (Input.GetKey(KeyCode.F) && (RaycastHit2D[0].transform.position.x - transform.position.x) * transform.localScale.x > 0)
             {
-                IsPushing = true;
-                rigidbody2DOfObject.mass = 0.1f;
+                if (!IsPushing)
+                {
+                    IsPushing = true;
+                    rigidbody2DOfObject.mass = 0.1f;
+                }
             }
             else
             {
-                rigidbody2DOfObject.mass = 10000;
-                rigidbody2DOfObject.velocity = new Vector2(0, 0);
-                rigidbody2DOfObject = null;
-                IsPushing = false;
+                if (IsPushing)
+                {
+                    rigidbody2DOfObject.mass = 10000;
+                    rigidbody2DOfObject.velocity = new Vector2(0, 0);
+                    rigidbody2DOfObject = null;
+                    IsPushing = false;
+                }
             }
         }
 
@@ -53,7 +59,10 @@ namespace Flip.Interact
             RaycastHit2D = Physics2D.RaycastAll(target.transform.position, new Vector2(1, 0) * transform.localScale.x, rads, LayerMask);
             if (RaycastHit2D.Length > 0&&RaycastHit2D[0].transform.CompareTag("Box"))
             {
-                rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
+                if (!rigidbody2DOfObject)
+                {
+                    rigidbody2DOfObject = RaycastHit2D[0].transform.GetComponent<Rigidbody2D>();
+                }
                 Canpush();
             }
             else
