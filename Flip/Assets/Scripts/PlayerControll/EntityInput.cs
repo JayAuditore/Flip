@@ -23,6 +23,10 @@ namespace Flip.PlayerControll
         [Space]
         [Header("Int")]
         public int JumpCount;
+        [Space]
+        [Header("Float")]
+        public float horizontalMove;
+
 
         #endregion
     }

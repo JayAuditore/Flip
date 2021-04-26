@@ -29,6 +29,8 @@ namespace Flip.PlayerControll
             {
                 SwitchMovement();
             }
+
+            entityInput.horizontalMove = Input.GetAxisRaw("Horizontal");
         }
 
         #endregion

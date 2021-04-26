@@ -22,6 +22,7 @@ public class BaseEnermy : MonoBehaviour
         if (sceneObj.collider != null || playerCollider == null)
         {
             // 切换到巡逻状态
+
             return;
         }
         // 判断是否再检测距离内
@@ -29,6 +30,7 @@ public class BaseEnermy : MonoBehaviour
         if (playerCollider.transform.position.x - transform.position.x > 0 && Mathf.Abs(Vector2.SignedAngle(transform.position - offSetVec, playerCollider.transform.position - offSetVec)) < lookAngle)
         {
             // 切换到追踪状态
+
         }
         else
         {

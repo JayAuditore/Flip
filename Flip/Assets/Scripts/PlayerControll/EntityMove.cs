@@ -12,6 +12,7 @@ namespace Flip.PlayerControll
         private float accelerationTimer;
         private float slowDownTimer;
         private float crouchTimer;
+        private float originalSize;
         private Vector2 Velocity;
         private Rigidbody2D rb;
         private EntityInput entityInput;
@@ -50,6 +51,7 @@ namespace Flip.PlayerControll
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            originalSize = Coll.size.y;
         }
 
         void Update()
@@ -87,14 +89,12 @@ namespace Flip.PlayerControll
         //计算速度
         public Vector2 CalculateVelocity()
         {
-            float horizontalMove = Input.GetAxisRaw("Horizontal");
-
             //有左右输入
-            if (horizontalMove != 0)
+            if (entityInput.horizontalMove != 0)
             {
                 slowDownTimer = 0;
 
-                transform.localScale = new Vector3(horizontalMove, 1, 1);
+                transform.localScale = new Vector3(entityInput.horizontalMove, transform.localScale.y, 1);
 
                 //地面上
                 if (entityInput.IsGrounded)
@@ -102,24 +102,24 @@ namespace Flip.PlayerControll
                     //推箱子
                     if (entityInput.IsPushing)
                     {
-                        Velocity = new Vector2(horizontalMove * PushingSpeed, rb.velocity.y);
+                        Velocity = new Vector2(entityInput.horizontalMove * PushingSpeed, rb.velocity.y);
                     }
                     //冲刺
                     else if (entityInput.IsAccelerating)
                     {
                         accelerationTimer += Time.fixedDeltaTime * (1 / AccelerationTime);
-                        Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, AugmentedVelocity * horizontalMove, accelerationTimer), rb.velocity.y);
+                        Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, AugmentedVelocity * entityInput.horizontalMove, accelerationTimer), rb.velocity.y);
                     }
                     //蹲下
                     else if (entityInput.CrouchPressed)
                     {
                         crouchTimer += Time.fixedDeltaTime * (1 / 0.2f);
-                        Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, horizontalMove * CrouchSpeed, crouchTimer), rb.velocity.y);
+                        Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, entityInput.horizontalMove * CrouchSpeed, crouchTimer), rb.velocity.y);
                     }
                     //正常走
                     else
                     {
-                        Velocity = new Vector2(horizontalMove * Speed, rb.velocity.y);
+                        Velocity = new Vector2(entityInput.horizontalMove * Speed, rb.velocity.y);
                     }
 
                     //重置timer
@@ -136,24 +136,24 @@ namespace Flip.PlayerControll
                 else if (!entityInput.IsGrounded)
                 {
                     //初速度为0
-                    if (rb.velocity.x * horizontalMove == 0)
+                    if (rb.velocity.x * entityInput.horizontalMove == 0)
                     {
-                        Velocity = new Vector2(horizontalMove * Speed, rb.velocity.y);
+                        Velocity = new Vector2(entityInput.horizontalMove * Speed, rb.velocity.y);
                     }
                     //同向移动
-                    if (rb.velocity.x * horizontalMove > 0)
+                    if (rb.velocity.x * entityInput.horizontalMove > 0)
                     {
                         Velocity = new Vector2(rb.velocity.x, rb.velocity.y);
                     }
                     //反向移动
-                    if (rb.velocity.x * horizontalMove < 0)
+                    if (rb.velocity.x * entityInput.horizontalMove < 0)
                     {
                         Velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
                     }
                 }
             }
             //无左右输入
-            else if (horizontalMove == 0)
+            else if (entityInput.horizontalMove == 0)
             {
                 slowDownTimer += Time.fixedDeltaTime * (1 / 0.2f);
                 Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, slowDownTimer), rb.velocity.y);
@@ -219,17 +219,19 @@ namespace Flip.PlayerControll
         //蹲下
         void Crouch()
         {
+            float size = originalSize;
+
             //蹲下
             if (entityInput.CrouchPressed)
             {
-                Coll.size = new Vector2(Coll.size.x, 0.5f);
+                Coll.size = new Vector2(Coll.size.x, size/2);
                 Coll.offset = new Vector2(Coll.offset.x, -0.25f);
                 entityInput.CanJump = false;
             }
             //站立
             if (!entityInput.CrouchPressed)
             {
-                Coll.size = new Vector2(Coll.size.x, 1f);
+                Coll.size = new Vector2(Coll.size.x, originalSize);
                 Coll.offset = new Vector2(Coll.offset.x, 0f);
                 entityInput.CanJump = true;
             }
