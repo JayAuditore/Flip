@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df7de523effa7f449b52e84709c8d7d, type: 3}
+  m_Name: EnemyTransitionTable
+  m_EditorClassIdentifier: 
+  transitionItems:
+  - fromState: {fileID: 11400000, guid: 432b1ebe1b11f314aafd22fc82b657fe, type: 2}
+    toState: {fileID: 11400000, guid: 22888bcef7c7c36489272f25a977004d, type: 2}
+    conditions:
+    - expectedResult: 1
+      condition: {fileID: 11400000, guid: 52b1ad5b74d94cd41a40064ac0ea4434, type: 2}
+  - fromState: {fileID: 11400000, guid: 22888bcef7c7c36489272f25a977004d, type: 2}
+    toState: {fileID: 11400000, guid: 432b1ebe1b11f314aafd22fc82b657fe, type: 2}
+    conditions:
+    - expectedResult: 1
+      condition: {fileID: 11400000, guid: f48886aa26f5b6d43a8ae6b72e317ac4, type: 2}

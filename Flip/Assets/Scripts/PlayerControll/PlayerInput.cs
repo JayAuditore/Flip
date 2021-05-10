@@ -8,8 +8,11 @@ namespace Flip.PlayerControll
 {
     public class PlayerInput : BaseSingletonWithMono<PlayerInput>
     {
+        #region  字段
         private EntityInput entityInput;
         private PushObject pushObject;
+
+        #endregion
 
         #region Unity回调
 
@@ -105,6 +108,12 @@ namespace Flip.PlayerControll
         {
             return entityInput.CanControl = true;
         }
+
+        ////玩家身前2单位，从天上射一条射线下来，碰到的ground与player的高度差大于3，就可以翻越（区别于大跳）
+        //public void OverObstacle()
+        //{
+        //    entityInput.Object=Physics2D.RaycastAll(new Vector2(transform.localPosition.x+2f,500f),Vector2.down,)
+        //}
 
         #endregion
     }

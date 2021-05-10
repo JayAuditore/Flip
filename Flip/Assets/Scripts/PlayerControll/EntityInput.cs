@@ -26,7 +26,9 @@ namespace Flip.PlayerControll
         [Space]
         [Header("Float")]
         public float horizontalMove;
-
+        [Space]
+        [Header("Raycast Info")]
+        public RaycastHit2D[] Object;
 
         #endregion
     }
