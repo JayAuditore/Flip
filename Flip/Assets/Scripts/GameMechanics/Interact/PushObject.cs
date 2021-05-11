@@ -57,7 +57,7 @@ namespace Flip.Interact
         public void Push(GameObject target, float rads, LayerMask collidermask)
         {
             RaycastHit2D = Physics2D.RaycastAll(target.transform.position, new Vector2(1, 0) * transform.localScale.x, rads, LayerMask);
-            if (RaycastHit2D.Length > 0&&RaycastHit2D[0].transform.CompareTag("Box"))
+            if (RaycastHit2D.Length > 0 && RaycastHit2D[0].transform.CompareTag("Box"))
             {
                 if (Object.ReferenceEquals(rigidbody2DOfObject,null))
                 {
