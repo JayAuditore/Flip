@@ -94,7 +94,7 @@ namespace Flip.PlayerControll
             {
                 slowDownTimer = 0;
 
-                transform.localScale = new Vector3(entityInput.horizontalMove, transform.localScale.y, 1);
+                transform.localScale = new Vector3(-entityInput.horizontalMove, transform.localScale.y, 1);
 
                 //地面上
                 if (entityInput.IsGrounded)
