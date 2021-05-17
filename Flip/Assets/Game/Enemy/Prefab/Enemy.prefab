@@ -181,13 +181,29 @@ MonoBehaviour:
   CrouchSpeed: 2.5
   AugmentedVelocity: 10
   PushingSpeed: 3
+  standStateData:
+    LeftHeadPos: {x: 0, y: 0, z: 0}
+    RightHeadPos: {x: 0, y: 0, z: 0}
+    LeftFootPos: {x: 0, y: 0, z: 0}
+    RightFootPos: {x: 0, y: 0, z: 0}
+    Direction: 0
+    OffSet: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+  crouchStateData:
+    LeftHeadPos: {x: 0, y: 0, z: 0}
+    RightHeadPos: {x: 0, y: 0, z: 0}
+    LeftFootPos: {x: 0, y: 0, z: 0}
+    RightFootPos: {x: 0, y: 0, z: 0}
+    Direction: 0
+    OffSet: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
   LeftFoot: 0
   RightFoot: 0
   Coll: {fileID: 2155764720915360229}
-  Ground1: {fileID: 2155764722038881859}
-  Ground2: {fileID: 2155764721013964777}
-  Ceiling1: {fileID: 2155764721968692113}
-  Ceiling2: {fileID: 2155764722028931889}
+  LeftFootTrans: {fileID: 2155764722038881859}
+  RightFootTrans: {fileID: 2155764721013964777}
+  LeftHeadTrans: {fileID: 2155764721968692113}
+  RightHeadTrans: {fileID: 2155764721013964777}
   Ground:
     serializedVersion: 2
     m_Bits: 64

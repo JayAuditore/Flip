@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Flip.PlayerControll
 {
@@ -12,7 +13,6 @@ namespace Flip.PlayerControll
         private float accelerationTimer;
         private float slowDownTimer;
         private float crouchTimer;
-        private float originalSize;
         private Vector2 Velocity;
         private Rigidbody2D rb;
         private EntityInput entityInput;
@@ -25,17 +25,24 @@ namespace Flip.PlayerControll
         public float CrouchSpeed;
         public float AugmentedVelocity;
         public float PushingSpeed;
+        
+        [Header("StateData")] 
+        public MoveStateData standStateData;
+        public MoveStateData crouchStateData;
+        
         [Space]
         [Header("Bool")]
         public bool LeftFoot;
         public bool RightFoot;
+        
         [Space]
         [Header("Component")]
         public CapsuleCollider2D Coll;
-        public Transform Ground1;
-        public Transform Ground2;
-        public Transform Ceiling1;
-        public Transform Ceiling2;
+        public Transform LeftFootTrans;
+        public Transform RightFootTrans;
+        public Transform LeftHeadTrans; 
+        public Transform RightHeadTrans;
+        
         [Space]
         public LayerMask Ground;
 
@@ -51,7 +58,6 @@ namespace Flip.PlayerControll
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
-            originalSize = Coll.size.y;
         }
 
         void Update()
@@ -73,8 +79,8 @@ namespace Flip.PlayerControll
         //地面检测
         public void GroundCheck()
         {
-            LeftFoot = Physics2D.OverlapCircle(Ground1.position, 0.1f, Ground);
-            RightFoot = Physics2D.OverlapCircle(Ground2.position, 0.1f, Ground);
+            LeftFoot = Physics2D.OverlapCircle(LeftFootTrans.position, 0.1f, Ground);
+            RightFoot = Physics2D.OverlapCircle(RightFootTrans.position, 0.1f, Ground);
 
             if (!LeftFoot && !RightFoot)
             {
@@ -219,33 +225,31 @@ namespace Flip.PlayerControll
         //蹲下
         void Crouch()
         {
-            float size = originalSize;
-
             //蹲下
             if (entityInput.CrouchPressed)
             {
-                // 临时代码
-                Coll.direction = CapsuleDirection2D.Horizontal;
-                Coll.offset = new Vector2(0.2663295f, -0.3371629f);
-                Coll.size = new Vector2(1.2f, 0.68f);
-                // Coll.size = new Vector2(Coll.size.x, size/2);
-                // Coll.offset = new Vector2(Coll.offset.x, -0.25f);
+                SetStateData(crouchStateData);
                 entityInput.CanJump = false;
             }
             //站立
-            if (!entityInput.CrouchPressed)
+            else
             {
-                // 临时代码
-                Coll.direction = CapsuleDirection2D.Vertical;
-                Coll.offset = new Vector2(0, -0.05305123f);
-                Coll.size = new Vector2(0.5485363f, 1.250404f);
-                // Coll.size = new Vector2(Coll.size.x, originalSize);
-                // Coll.offset = new Vector2(Coll.offset.x, 0f);
+                SetStateData(standStateData);
                 entityInput.CanJump = true;
             }
         }
 
-
+        private void SetStateData(MoveStateData stateData)
+        {
+            if (stateData == null) return;
+            LeftFootTrans.localPosition = stateData.LeftFootPos;
+            RightFootTrans.localPosition = stateData.RightFootPos;
+            LeftHeadTrans.localPosition = stateData.LeftHeadPos;
+            RightHeadTrans.localPosition = stateData.RightHeadPos;
+            Coll.direction = stateData.Direction;
+            Coll.offset = stateData.OffSet;
+            Coll.size = stateData.Size;
+        }
 
         #endregion
     }
