@@ -73,11 +73,13 @@ namespace Flip.AI
         //绘制视野范围
         private void OnDrawGizmosSelected()
         {
+            int flipView = gameObject.transform.localScale.x > 0 ? 1 : -1;
             Handles.color = new Color(1, 1, 1, 0.3f);
-            Handles.DrawSolidArc(transform.position - new Vector3(lookOffSet, 0, 0), transform.forward, transform.right, lookAngle, lookDistance);
-            Handles.DrawSolidArc(transform.position - new Vector3(lookOffSet, 0, 0), transform.forward, transform.right, -lookAngle, lookDistance);
+            Handles.DrawSolidArc(transform.position - new Vector3(lookOffSet, 0, 0) * flipView, transform.forward, transform.right * flipView, lookAngle, lookDistance);
+            Handles.DrawSolidArc(transform.position - new Vector3(lookOffSet, 0, 0) * flipView, transform.forward, transform.right * flipView, -lookAngle, lookDistance);
             Handles.color = new Color(0, 1, 1, 1.0f);
-            Handles.DrawLine(transform.position + new Vector3(0, heightOffSet, 0), transform.position + new Vector3(lookDistance - lookOffSet, heightOffSet, 0));
+            Vector3 heightOffSetVec = new Vector3(0, heightOffSet, 0);
+            Handles.DrawLine(transform.position + heightOffSetVec, transform.position + new Vector3(lookDistance - lookOffSet, 0, 0) * flipView + heightOffSetVec);
         }
 
         //追玩家

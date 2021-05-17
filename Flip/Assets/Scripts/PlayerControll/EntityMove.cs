@@ -11,7 +11,6 @@ namespace Flip.PlayerControll
         #region 字段
 
         private float accelerationTimer;
-        private float slowDownTimer;
         private float crouchTimer;
         private Vector2 Velocity;
         private Rigidbody2D rb;
@@ -25,24 +24,25 @@ namespace Flip.PlayerControll
         public float CrouchSpeed;
         public float AugmentedVelocity;
         public float PushingSpeed;
-        
-        [Header("StateData")] 
+        public float SlowDownTimer;
+
+        [Header("StateData")]
         public MoveStateData standStateData;
         public MoveStateData crouchStateData;
-        
+
         [Space]
         [Header("Bool")]
         public bool LeftFoot;
         public bool RightFoot;
-        
+
         [Space]
         [Header("Component")]
         public CapsuleCollider2D Coll;
         public Transform LeftFootTrans;
         public Transform RightFootTrans;
-        public Transform LeftHeadTrans; 
+        public Transform LeftHeadTrans;
         public Transform RightHeadTrans;
-        
+
         [Space]
         public LayerMask Ground;
 
@@ -98,7 +98,7 @@ namespace Flip.PlayerControll
             //有左右输入
             if (entityInput.horizontalMove != 0)
             {
-                slowDownTimer = 0;
+                SlowDownTimer = 0;
 
                 transform.localScale = new Vector3(entityInput.horizontalMove, transform.localScale.y, 1);
 
@@ -161,8 +161,8 @@ namespace Flip.PlayerControll
             //无左右输入
             else if (entityInput.horizontalMove == 0)
             {
-                slowDownTimer += Time.fixedDeltaTime * (1 / 0.2f);
-                Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, slowDownTimer), rb.velocity.y);
+                SlowDownTimer += Time.fixedDeltaTime * (1 / 0.2f);
+                Velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, SlowDownTimer), rb.velocity.y);
             }
 
             return Velocity;
@@ -241,7 +241,8 @@ namespace Flip.PlayerControll
 
         private void SetStateData(MoveStateData stateData)
         {
-            if (stateData == null) return;
+            // 临时代码
+            if (stateData.OffSet == Vector2.zero) return;
             LeftFootTrans.localPosition = stateData.LeftFootPos;
             RightFootTrans.localPosition = stateData.RightFootPos;
             LeftHeadTrans.localPosition = stateData.LeftHeadPos;
