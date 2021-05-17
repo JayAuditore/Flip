@@ -46,7 +46,7 @@ namespace Flip.AI
         public bool SwitchCondition()
         {
             // 正反面视野反转值
-            int lookAtMultiply = transform.localScale.x > 0 ? -1 : 1;
+            int lookAtMultiply = transform.localScale.x > 0 ? 1 : -1;
             Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, lookDistance, lookLayer);
             Vector3 startVec = transform.position + new Vector3(0, heightOffSet, 0);
             Vector3 endVec = transform.position + new Vector3(lookDistance - lookOffSet, heightOffSet, 0);

@@ -94,7 +94,7 @@ namespace Flip.PlayerControll
             {
                 slowDownTimer = 0;
 
-                transform.localScale = new Vector3(-entityInput.horizontalMove, transform.localScale.y, 1);
+                transform.localScale = new Vector3(entityInput.horizontalMove, transform.localScale.y, 1);
 
                 //地面上
                 if (entityInput.IsGrounded)
@@ -224,15 +224,23 @@ namespace Flip.PlayerControll
             //蹲下
             if (entityInput.CrouchPressed)
             {
-                Coll.size = new Vector2(Coll.size.x, size/2);
-                Coll.offset = new Vector2(Coll.offset.x, -0.25f);
+                // 临时代码
+                Coll.direction = CapsuleDirection2D.Horizontal;
+                Coll.offset = new Vector2(0.2663295f, -0.3371629f);
+                Coll.size = new Vector2(1.2f, 0.68f);
+                // Coll.size = new Vector2(Coll.size.x, size/2);
+                // Coll.offset = new Vector2(Coll.offset.x, -0.25f);
                 entityInput.CanJump = false;
             }
             //站立
             if (!entityInput.CrouchPressed)
             {
-                Coll.size = new Vector2(Coll.size.x, originalSize);
-                Coll.offset = new Vector2(Coll.offset.x, 0f);
+                // 临时代码
+                Coll.direction = CapsuleDirection2D.Vertical;
+                Coll.offset = new Vector2(0, -0.05305123f);
+                Coll.size = new Vector2(0.5485363f, 1.250404f);
+                // Coll.size = new Vector2(Coll.size.x, originalSize);
+                // Coll.offset = new Vector2(Coll.offset.x, 0f);
                 entityInput.CanJump = true;
             }
         }
