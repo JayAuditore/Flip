@@ -55,14 +55,14 @@ namespace Flip.PauseMenu
             {
                 _instance.TransformGameState();
             }
-            if (gameState == GameState.Pause)
-            {
-                if (!Input.GetKey(KeyCode.Mouse0))
-                {
-                    Input.ResetInputAxes();
-                }
-                
-            }
+            //if (gameState == GameState.Pause)
+            //{
+            //    if (!Input.GetKey(KeyCode.Mouse0))
+            //    {
+            //        Input.ResetInputAxes();
+            //    }
+            //    
+            //}
         }
     }
 }
