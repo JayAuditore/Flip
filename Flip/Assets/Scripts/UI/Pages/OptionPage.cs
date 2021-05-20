@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Flip.UI
 {
-    public interface IUserInterfacePreInit
+    public class OptionPage : BaseUI
     {
-        void PreInit();
+
     }
 }

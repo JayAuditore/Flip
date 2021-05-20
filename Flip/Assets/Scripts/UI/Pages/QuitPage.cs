@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Flip.UI
 {
-    public interface IUserInterfacePreInit
+    public class QuitPage : BaseUI
     {
-        void PreInit();
+
     }
 }
