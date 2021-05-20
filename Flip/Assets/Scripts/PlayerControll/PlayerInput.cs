@@ -9,8 +9,12 @@ namespace Flip.PlayerControll
     public class PlayerInput : BaseSingletonWithMono<PlayerInput>
     {
         #region  字段
+
         private EntityInput entityInput;
         private PushObject pushObject;
+        private Renderer render;
+        private Rigidbody2D rb2D;
+        private EntityMove entityMove;
 
         #endregion
 
@@ -20,6 +24,9 @@ namespace Flip.PlayerControll
         {
             entityInput = GetComponent<EntityInput>();
             pushObject = GetComponent<PushObject>();
+            render = GetComponent<Renderer>();
+            rb2D = GetComponent<Rigidbody2D>();
+            entityMove = GetComponent<EntityMove>();
         }
 
         void Update()
@@ -31,6 +38,11 @@ namespace Flip.PlayerControll
             else if (AllowControl())
             {
                 SwitchMovement();
+            }
+
+            if (entityInput.IsInvincible)
+            {
+                Flash();
             }
 
             entityInput.horizontalMove = Input.GetAxisRaw("Horizontal");
@@ -109,11 +121,56 @@ namespace Flip.PlayerControll
             return entityInput.CanControl = true;
         }
 
-        ////玩家身前2单位，从天上射一条射线下来，碰到的ground与player的高度差大于3，就可以翻越（区别于大跳）
-        //public void OverObstacle()
-        //{
-        //    entityInput.Object=Physics2D.RaycastAll(new Vector2(transform.localPosition.x+2f,500f),Vector2.down,)
-        //}
+        //碰到怪物后的反应
+        public void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                GetInvincible();
+                Physics2D.IgnoreCollision(this.GetComponent<CapsuleCollider2D>(), collision.collider, true);
+                entityMove.SlowDownTimer = 0;
+
+                // 弹开
+                if (transform.position.x - collision.transform.position.x < 0f)
+                {
+                    Debug.Log("1");
+                    //rb2D.velocity = new Vector2(-5f, rb2D.velocity.y);
+                    transform.Translate(-2f, 0f, 0f);
+                }
+                else
+                {
+                    Debug.Log("2");
+                    //rb2D.velocity = new Vector2(5f, rb2D.velocity.y);
+                    transform.Translate(2f, 0f, 0f);
+
+                }
+            }
+        }
+
+        //变成无敌状态
+        public void GetInvincible()
+        {
+            entityInput.IsInvincible = true;
+        }
+
+        //受伤之后闪烁
+        public void Flash()
+        {
+            entityInput.InvincibleTimer += Time.deltaTime;
+
+            if (entityInput.InvincibleTimer < 1.5f)
+            {
+                float _timer = entityInput.InvincibleTimer % 0.075f;
+                render.enabled = _timer > 0.0375f;
+            }
+            else
+            {
+                render.enabled = true;
+                entityInput.IsInvincible = false;
+                entityInput.InvincibleTimer = 0;
+                Physics2D.IgnoreCollision(this.GetComponent<CapsuleCollider2D>(), GameObject.FindGameObjectWithTag("Enemy").transform.gameObject.GetComponent<CapsuleCollider2D>(), false);
+            }
+        }
 
         #endregion
     }

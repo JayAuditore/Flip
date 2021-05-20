@@ -20,12 +20,14 @@ namespace Flip.PlayerControll
         public bool NormalJumping;
         public bool CanControl = true;
         public bool IsPushing;
+        public bool IsInvincible;
         [Space]
         [Header("Int")]
         public int JumpCount;
         [Space]
         [Header("Float")]
         public float horizontalMove;
+        public float InvincibleTimer;
         [Space]
         [Header("Raycast Info")]
         public RaycastHit2D[] Object;

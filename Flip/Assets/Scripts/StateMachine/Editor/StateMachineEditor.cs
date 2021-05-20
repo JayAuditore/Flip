@@ -22,7 +22,6 @@ namespace Flip.StateMachine
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            serializedObject.Update();
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Current StateName:");
