@@ -7,7 +7,7 @@ namespace Flip.StateMachine
     public class StateMachine : MonoBehaviour
     {
         public State CurrentState => currentState;                      // 外部获取
-        
+
         private State currentState;                                     // 当前状态
         [SerializeField] private TransitionTableSO transitionTable;     // 状态转换表
         private void Start()

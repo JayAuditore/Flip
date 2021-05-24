@@ -33,8 +33,9 @@ namespace Flip.PauseMenu
             KeyCodeToPause();
         }
         //改变游戏的运行状态，运行与暂停
-        public void TransformGameState()
+        public void Resume()
         {
+            //继续游戏
             if (gameState == GameState.Running)
             {
                 PauseCanvas.gameObject.SetActive(true);
@@ -48,12 +49,25 @@ namespace Flip.PauseMenu
                 gameState = GameState.Running;
             }
         }
+        public void Setting()
+        {
+            //加载设置页面
+        }
+        public void Main()
+        {
+            //加载开始页面
+            //SceneManager.LoadScene();
+        }
+        public void Quit()
+        {
+            
+        }
         //控制游戏的快捷键
         public void KeyCodeToPause()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _instance.TransformGameState();
+                _instance.Resume();
             }
             //if (gameState == GameState.Pause)
             //{
@@ -61,7 +75,6 @@ namespace Flip.PauseMenu
             //    {
             //        Input.ResetInputAxes();
             //    }
-            //    
             //}
         }
     }
