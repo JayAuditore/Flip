@@ -34,21 +34,27 @@ namespace Flip.UI
         #region 方法
 
         //点击选项按钮
-        public void OptionPageOnClick()
+        public void OnOptionPageClick()
         {
             MainMenu.transform.DORotate(new Vector3(0f, 180f, 0f), 3f);
         }
 
         //点击退出按钮
-        public void QuitPageOnClick()
+        public void OnQuitPageClick()
         {
             QuitPage.Show();
         }
 
         //在选项界面点返回
-        public void OptionPageBackOnClick()
+        public void OnOptionPageBackClick()
         {
             MainMenu.transform.DORotate(new Vector3(0f, 0f, 0f), 3f);
+        }
+
+        //点开始游戏
+        public void OnStartButtonClick()
+        {
+            LoadSceneController.Instance.LoadScene(1, null, null);
         }
 
         #endregion

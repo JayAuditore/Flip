@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/TeamMembers/TestMainMenu.unity
+    guid: 188e738a0126d544089c92ab6c69a972
+  - enabled: 1
+    path: Assets/Scenes/TeamMembers/Jay_Auditore.unity
+    guid: 3151fa50ac3ac8e42b74badb5f37bebc
   m_configObjects: {}

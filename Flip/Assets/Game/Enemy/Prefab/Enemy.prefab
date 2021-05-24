@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2155764722181654954}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,8 +160,10 @@ MonoBehaviour:
   NormalJumping: 0
   CanControl: 1
   IsPushing: 0
+  IsInvincible: 0
   JumpCount: 0
   horizontalMove: 0
+  InvincibleTimer: 0
 --- !u!114 &2155764720915360249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +183,7 @@ MonoBehaviour:
   CrouchSpeed: 2.5
   AugmentedVelocity: 10
   PushingSpeed: 3
+  SlowDownTimer: 0
   standStateData:
     LeftHeadPos: {x: 0, y: 0, z: 0}
     RightHeadPos: {x: 0, y: 0, z: 0}
