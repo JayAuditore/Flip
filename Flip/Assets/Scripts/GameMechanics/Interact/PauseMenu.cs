@@ -14,11 +14,11 @@ namespace Flip.PauseMenu
     {
         public static PauseMenu _instance;
         public GameState gameState = GameState.Running;
-        public GameObject PauseCanvas;
-        private void Awake()
+        public GameObject _PauseMenu;      //挂在PauseMenu上
+        private void Start()
         {
             _instance = this;
-            if (PauseCanvas.activeSelf)
+            if (_PauseMenu.activeSelf)
             {
                 gameState = GameState.Pause;
             }
@@ -38,13 +38,13 @@ namespace Flip.PauseMenu
             //继续游戏
             if (gameState == GameState.Running)
             {
-                PauseCanvas.gameObject.SetActive(true);
+                _PauseMenu.gameObject.SetActive(true);
                 Time.timeScale = 0;
                 gameState = GameState.Pause;
             }
             else if (gameState == GameState.Pause)
             {
-                PauseCanvas.gameObject.SetActive(false);
+                _PauseMenu.gameObject.SetActive(false);
                 Time.timeScale = 1;
                 gameState = GameState.Running;
             }

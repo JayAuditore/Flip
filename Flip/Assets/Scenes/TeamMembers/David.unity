@@ -147,12 +147,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8016448}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 995168892}
-  m_Father: {fileID: 1278678796}
+  m_Father: {fileID: 1462498759}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -614,7 +614,6 @@ GameObject:
   - component: {fileID: 711649194}
   - component: {fileID: 711649198}
   - component: {fileID: 711649197}
-  - component: {fileID: 711649199}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -753,20 +752,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &711649199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711649193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba8ff4342ed1cd4794e36867f89aa77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameState: 0
-  PauseCanvas: {fileID: 1278678792}
 --- !u!1 &795123640 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 991970161488313110, guid: 115ae0d6f606b634ea5c349d75560aa0, type: 3}
@@ -989,7 +974,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 711649199}
+        - m_Target: {fileID: 1278678797}
           m_TargetAssemblyTypeName: Flip.PauseMenu.PauseMenu, Assembly-CSharp
           m_MethodName: Setting
           m_Mode: 1
@@ -1225,7 +1210,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 711649199}
+        - m_Target: {fileID: 1278678797}
           m_TargetAssemblyTypeName: Flip.PauseMenu.PauseMenu, Assembly-CSharp
           m_MethodName: Main
           m_Mode: 1
@@ -1359,8 +1344,9 @@ GameObject:
   - component: {fileID: 1278678795}
   - component: {fileID: 1278678794}
   - component: {fileID: 1278678793}
+  - component: {fileID: 1278678797}
   m_Layer: 5
-  m_Name: PauseMenu
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1438,8 +1424,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 8016449}
-  - {fileID: 1570269675}
+  - {fileID: 1462498759}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1448,6 +1433,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1278678797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278678792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba8ff4342ed1cd4794e36867f89aa77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameState: 0
+  _PauseMenu: {fileID: 1462498758}
 --- !u!1 &1402182779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1540,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 711649199}
+        - m_Target: {fileID: 1278678797}
           m_TargetAssemblyTypeName: Flip.PauseMenu.PauseMenu, Assembly-CSharp
           m_MethodName: Resume
           m_Mode: 1
@@ -1553,6 +1552,43 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &1462498758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1462498759}
+  m_Layer: 5
+  m_Name: PauseMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1462498759
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462498758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8016449}
+  - {fileID: 1570269675}
+  m_Father: {fileID: 1278678796}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1479775794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1650,7 +1686,7 @@ RectTransform:
   - {fileID: 1133114194}
   - {fileID: 1185135085}
   - {fileID: 1608125037}
-  m_Father: {fileID: 1278678796}
+  m_Father: {fileID: 1462498759}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1764,7 +1800,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 711649199}
+        - m_Target: {fileID: 1278678797}
           m_TargetAssemblyTypeName: Flip.PauseMenu.PauseMenu, Assembly-CSharp
           m_MethodName: Quit
           m_Mode: 1
