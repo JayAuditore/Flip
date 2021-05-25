@@ -21,12 +21,6 @@ namespace Flip.UI
         {
             get
             {
-                //如果是空的，新建一个game object并挂上这个脚本
-                if (instance == null)
-                {
-                    GameObject obj = new GameObject("SceneController");
-                    obj.AddComponent<LoadSceneController>();
-                }
                 return instance;
             }
         }
@@ -39,12 +33,12 @@ namespace Flip.UI
         {
             //不销毁
             DontDestroyOnLoad(gameObject);
-            //如果不止一个controller，抛出异常
-            if (instance != null)
-            {
-                throw new Exception("There's more than one scene controller. ");
-            }
             instance = this;
+            ////如果不止一个controller，抛出异常
+            //if (instance != null)
+            //{
+            //    throw new Exception("There's more than one scene controller. ");
+            //}
         }
 
         #endregion
@@ -59,11 +53,11 @@ namespace Flip.UI
             this.onFinish = onfinish;
 
             //开启协程
-            StartCoroutine(LoadScene());
+            StartCoroutine(LoadScenes());
         }
 
         //异步加载场景
-        private IEnumerator LoadScene()
+        private IEnumerator LoadScenes()
         {
             yield return 0;
             //异步加载场景
