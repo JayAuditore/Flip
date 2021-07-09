@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Flip.UI.Base;
+using Flip.SceneController;
 
-namespace Flip.UI
+namespace Flip.UI.MainMenu
 {
     public class MainPage : BaseUI
     {
@@ -20,16 +22,17 @@ namespace Flip.UI
 
         private void Update()
         {
-            ActivateOptionBackground();
-            ActivateResumeBackground();
+            ActivateBackground();
         }
 
         #endregion
 
         #region 方法
 
-        //判断是否显示设置页面的背景
-        private void ActivateOptionBackground()
+        /// <summary>
+        /// 判断是否显示设置页面的背景
+        /// </summary>
+        private void ActivateBackground()
         {
             if (MainMenu.transform.localRotation.eulerAngles.y > 90f)
             {
@@ -41,54 +44,53 @@ namespace Flip.UI
             }
         }
 
-        //判断是否显示继续页面的背景
-        private void ActivateResumeBackground()
-        {
-            if (SavePage?.transform.localRotation.eulerAngles.y > 90f)
-            {
-                SavePage?.transform.Find("Background").gameObject.SetActive(true);
-            }
-            else
-            {
-                SavePage?.transform.Find("Background").gameObject.SetActive(false);
-            }
-        }
-
-        //点击继续按钮
+        /// <summary>
+        /// 点击继续按钮
+        /// </summary>
         public void OnResumeClick()
         {
             SavePage.gameObject.SetActive(true);
             MainMenu.transform.DORotate(new Vector3(0f, 180f, 0f), 2f);
         }
 
-        //在存档界面点返回
+        /// <summary>
+        /// 在存档界面点返回
+        /// </summary>
         public void OnResumeBackClick()
         {
             MainMenu.transform.DORotate(new Vector3(0f, 0f, 0f), 2f);
             SavePage.gameObject.SetActive(false);
         }
 
-        //点击选项按钮
+        /// <summary>
+        /// 点击选项按钮
+        /// </summary>
         public void OnOptionClick()
         {
             OptionPage.gameObject.SetActive(true);
             MainMenu.transform.DORotate(new Vector3(0f, 180f, 0f), 2f);
         }
 
-        //在选项界面点返回
+        /// <summary>
+        /// 在选项界面点返回
+        /// </summary>
         public void OnOptionBackClick()
         {
             MainMenu.transform.DORotate(new Vector3(0f, 0f, 0f), 2f);
             OptionPage.gameObject.SetActive(false);
         }
 
-        //点击退出按钮
+        /// <summary>
+        /// 点击退出按钮
+        /// </summary>
         public void OnQuitClick()
         {
             QuitPage.Show();
         }
 
-        //点开始游戏
+        /// <summary>
+        /// 点开始游戏
+        /// </summary>
         public void OnStartClick()
         {
             LoadSceneController.Instance.LoadScene(1, null, null);

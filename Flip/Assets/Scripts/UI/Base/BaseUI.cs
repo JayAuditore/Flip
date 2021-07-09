@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Flip.UI
+namespace Flip.UI.Base
 {
     public class BaseUI : MonoBehaviour
     {

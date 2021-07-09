@@ -13,7 +13,6 @@ namespace Flip.PlayerControll
         private EntityInput entityInput;
         private PushObject pushObject;
         private Renderer render;
-        private Rigidbody2D rb2D;
         private EntityMove entityMove;
 
         #endregion
@@ -25,17 +24,16 @@ namespace Flip.PlayerControll
             entityInput = GetComponent<EntityInput>();
             pushObject = GetComponent<PushObject>();
             render = GetComponent<Renderer>();
-            rb2D = GetComponent<Rigidbody2D>();
             entityMove = GetComponent<EntityMove>();
         }
 
         void Update()
         {
-            if (CancelControl())
+            if (!entityInput.CanControl)
             {
                 return;
             }
-            else if (AllowControl())
+            else
             {
                 SwitchMovement();
             }
@@ -109,19 +107,20 @@ namespace Flip.PlayerControll
             }
         }
 
-        //禁止玩家操作
-        public bool CancelControl()
+        /// <summary>
+        /// 禁止玩家操作
+        /// </summary>
+        /// <param name="state">是否开启</param>
+        /// <returns>开启或关闭</returns>
+        public bool CanControl(bool state)
         {
-            return entityInput.CanControl = false;
+            return entityInput.CanControl = state;
         }
 
-        //开启玩家操作
-        public bool AllowControl()
-        {
-            return entityInput.CanControl = true;
-        }
-
-        //碰到怪物后的反应
+        /// <summary>
+        /// 碰到怪物后的反应
+        /// </summary>
+        /// <param name="collision">碰撞的物体</param>
         public void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Enemy"))
@@ -134,26 +133,28 @@ namespace Flip.PlayerControll
                 if (transform.position.x - collision.transform.position.x < 0f)
                 {
                     Debug.Log("1");
-                    //rb2D.velocity = new Vector2(-5f, rb2D.velocity.y);
                     transform.Translate(-2f, 0f, 0f);
                 }
                 else
                 {
                     Debug.Log("2");
-                    //rb2D.velocity = new Vector2(5f, rb2D.velocity.y);
                     transform.Translate(2f, 0f, 0f);
 
                 }
             }
         }
 
-        //变成无敌状态
+        /// <summary>
+        /// 变成无敌状态
+        /// </summary>
         public void GetInvincible()
         {
             entityInput.IsInvincible = true;
         }
 
-        //受伤之后闪烁
+        /// <summary>
+        /// 受伤之后闪烁
+        /// </summary>
         public void Flash()
         {
             entityInput.InvincibleTimer += Time.deltaTime;

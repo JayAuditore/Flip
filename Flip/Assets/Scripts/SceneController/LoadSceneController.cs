@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-namespace Flip.UI
+namespace Flip.SceneController
 {
     public class LoadSceneController : MonoBehaviour
     {
@@ -32,20 +32,28 @@ namespace Flip.UI
         private void Awake()
         {
             //不销毁
-            DontDestroyOnLoad(gameObject);
-            instance = this;
-            ////如果不止一个controller，抛出异常
-            //if (instance != null)
-            //{
-            //    throw new Exception("There's more than one scene controller. ");
-            //}
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            //如果不止一个controller，抛出异常
+            else if (instance != null)
+            {
+                throw new Exception("There's more than one scene controller. ");
+            }
         }
 
         #endregion
 
         #region 方法
 
-        //加载场景
+        /// <summary>
+        /// 加载场景
+        /// </summary>
+        /// <param name="index">要加载的场景索引号</param>
+        /// <param name="onpagechange">跳转场景时候的回调函数，如果没有就null</param>
+        /// <param name="onfinish">跳转结束之后的回调，如果没有就null</param>
         public void LoadScene(int index, Action<float> onpagechange, Action onfinish)
         {
             this.Index = index;
@@ -56,7 +64,10 @@ namespace Flip.UI
             StartCoroutine(LoadScenes());
         }
 
-        //异步加载场景
+        /// <summary>
+        /// 异步加载场景
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator LoadScenes()
         {
             yield return 0;
